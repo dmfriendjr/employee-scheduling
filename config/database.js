@@ -1,10 +1,12 @@
 // config/database.js
+require ('dotenv').config();
+
 module.exports = {
   'connection': {
       'host': 'localhost',
       'user': 'root',
-      'password': 'password1'
+      'password': process.env.DB_PASS
   },
-'database': 'my_schema',
+'database': 'scheduling_db',
   'users_table': 'users'
 };
