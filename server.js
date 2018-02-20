@@ -1,7 +1,7 @@
 const express = require('express');
 const session = require('express-session');
-const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const exphbs = require('express-handlebars');
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -11,7 +11,9 @@ const flash = require('connect-flash');
 
 require('./config/passport')(passport); // pass passport for configuration
 
-app.use(cookieParser());
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
+
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
