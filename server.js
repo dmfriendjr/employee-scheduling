@@ -2,6 +2,8 @@ const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
+require ('dotenv').config();
+const db = require('./models');
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -25,6 +27,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session()); //Persistent login sessions
 app.use(flash());
+
+db.users.sync({force: true});
 
 require('./routes/login')(app, passport); // load our routes and pass in our app and fully configured passport
 

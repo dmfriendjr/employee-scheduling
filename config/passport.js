@@ -6,10 +6,9 @@ var LocalStrategy   = require('passport-local').Strategy;
 // load up the user model
 var mysql = require('mysql');
 var bcrypt = require('bcrypt-nodejs');
-var dbconfig = require('./database');
-var connection = mysql.createConnection(dbconfig.connection);
+var connection = mysql.createConnection(process.env.DATABASE_URL);
 
-connection.query('USE ' + dbconfig.database);
+connection.query('USE scheduling_db');
 // expose this function to our app using module.exports
 module.exports = function(passport) {
 
@@ -65,7 +64,6 @@ module.exports = function(passport) {
 
                     connection.query(insertQuery,[newUserMysql.username, newUserMysql.password],function(err, rows) {
                         newUserMysql.id = rows.insertId;
-
                         return done(null, newUserMysql);
                     });
                 }
