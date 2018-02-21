@@ -2,16 +2,22 @@ const express = require('express');
 const db = require('../models');
 
 const router = express.Router();
-db.users.hasMany(db.employees, {foreignKey: 'employer_id', constraints: false, as: 'employees'});
-db.employees.belongsTo(db.users, {foreignKey: 'employer_id', constraints: false, as: 'employer'});
+db.employees.belongsTo(db.users);
 
-router.get('/api/employees', isLoggedIn, function(req, res) {
-
+router.get('/api/employees/:uid', function(req, res) {
+  db.employees.findAll({where: {userId: req.params.uid}}).then(employees => {
+    res.send(employees);
+  })
 });
 
-router.post('/api/employees/:uid', isLoggedIn, function(req, res) {
-  // db.employees.create()
-  db.employees.create({name: 'test', phonenumber: '5555555555'});
+router.post('/api/employees', function(req, res) {
+  db.employees.create({name: req.body.name, phone_number: req.body.phone_number}).then(employee => {
+    db.users.findOne({where: {id: req.body.employer_id}}).then(employer => {
+      if (employer) {
+        employee.setUser(employer);
+      }
+    });
+  });
 });
 
 // route middleware to make sure
