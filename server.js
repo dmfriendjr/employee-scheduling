@@ -1,9 +1,10 @@
+require ('dotenv').config();
 const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
-require ('dotenv').config();
 const db = require('./models');
+const employeeRoutes = require('./controllers/employees_controller');
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -29,6 +30,11 @@ app.use(passport.session()); //Persistent login sessions
 app.use(flash());
 
 db.users.sync({force: true});
+db.employees.sync({force: true});
+
+//Setup Database relationships
+db.employees.belongsTo(db.users);
+
 
 require('./routes/login')(app, passport); // load our routes and pass in our app and fully configured passport
 
