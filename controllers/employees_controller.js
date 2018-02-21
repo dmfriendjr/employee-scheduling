@@ -4,15 +4,15 @@ const db = require('../models');
 const router = express.Router();
 db.employees.belongsTo(db.users);
 
-router.get('/api/employees/:uid', function(req, res) {
-  db.employees.findAll({where: {userId: req.params.uid}}).then(employees => {
+router.get('/employees', isLoggedIn, function(req, res) {
+  db.employees.findAll({where: {userId: req.user.id}}).then(employees => {
     res.send(employees);
   })
 });
 
-router.post('/api/employees', function(req, res) {
+router.post('/employees', isLoggedIn, function(req, res) {
   db.employees.create({name: req.body.name, phone_number: req.body.phone_number}).then(employee => {
-    db.users.findOne({where: {id: req.body.employer_id}}).then(employer => {
+    db.users.findOne({where: {id: req.user.id}}).then(employer => {
       if (employer) {
         employee.setUser(employer);
       }
