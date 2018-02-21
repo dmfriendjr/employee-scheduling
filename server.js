@@ -29,8 +29,8 @@ app.use(passport.initialize());
 app.use(passport.session()); //Persistent login sessions
 app.use(flash());
 
-db.users.sync({force: true});
-db.employees.sync({force: true});
+db.users.sync();
+db.employees.sync();
 
 //Setup Database relationships
 db.employees.belongsTo(db.users);
