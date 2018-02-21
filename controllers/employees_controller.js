@@ -9,8 +9,9 @@ router.get('/api/employees', isLoggedIn, function(req, res) {
 
 });
 
-router.post('/api/employees/:uid', function(req, res) {
-  
+router.post('/api/employees/:uid', isLoggedIn, function(req, res) {
+  // db.employees.create()
+  db.employees.create({name: 'test', phonenumber: '5555555555'});
 });
 
 // route middleware to make sure

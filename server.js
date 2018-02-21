@@ -35,7 +35,7 @@ db.employees.sync({force: true});
 //Setup Database relationships
 db.employees.belongsTo(db.users);
 
-
+app.use(employeeRoutes);
 require('./routes/login')(app, passport); // load our routes and pass in our app and fully configured passport
 
 
