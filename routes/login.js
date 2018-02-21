@@ -15,8 +15,12 @@ module.exports = function(app, passport) {
 	// =====================================
 	// show the login form
 	app.get('/login', function(req, res) {
-		// render the page and pass in any flash data if it exists
-		res.render('login', { message: req.flash('loginMessage') });
+    // render the page and pass in any flash data if it exists
+    if (req.user) {
+      res.redirect('/profile');
+    } else {
+      res.render('login', { message: req.flash('loginMessage') });
+    }
 	});
 
 	// process the login form
