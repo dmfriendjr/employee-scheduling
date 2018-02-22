@@ -20,6 +20,14 @@ module.exports = (sequelize, DataTypes) => {
     company: {
       type: DataTypes.STRING,
       allowNull: false
+    }, 
+    verificationToken: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    verified: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     }
   }, {
     timestamps: false

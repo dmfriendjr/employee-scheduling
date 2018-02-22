@@ -2,9 +2,9 @@ var LocalStrategy   = require('passport-local').Strategy;
 
 var bcrypt = require('bcrypt-nodejs');
 const db = require('../models');
+const mailer = require('../controllers/mail_controller');
 
 module.exports = function(passport) {
-
     // =========================================================================
     // passport session setup ==================================================
     // =========================================================================
@@ -44,12 +44,16 @@ module.exports = function(passport) {
                 username: username,
                 password: bcrypt.hashSync(password, null, null),
                 email: req.body.email,
-                company: req.body.companyName
+                company: req.body.companyName,
+                verificationToken: Math.floor(Math.random() * 100)
               };
               
               db.users.create(newUser).then((data) =>{
                 newUser.id = data.dataValues.id;
-                return done(null, newUser);
+                mailer.sendVerificationEmail(newUser.email, newUser.username, newUser.verificationToken);
+                return done(null, false, req.flash('signupMessage', 
+                `Signup successful. Please verify your email before logging in. 
+                <a href="http://localhost:8080/verify/${newUser.username}/${newUser.verificationToken}">TESTING ONLY VERIFICATION LINK</a>`));
               })
             }
           }).catch(error => {
@@ -70,6 +74,11 @@ module.exports = function(passport) {
             if (!data) {
               //No user was found
               return done(null, false, req.flash('loginMessage', 'Username or password was invalid.'));
+            }
+
+            if(!data.dataValues.verified) {
+              //User not has verified their email
+              return done(null, false, req.flash('loginMessage', 'Please verify your email before logging in.'));
             }
 
             if (!bcrypt.compareSync(password, data.dataValues.password)) {

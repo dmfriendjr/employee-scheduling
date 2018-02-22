@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
 const db = require('./models');
 const employeeRoutes = require('./controllers/employees_controller');
+const userRoutes = require('./controllers/user_controller');
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -34,6 +35,7 @@ db.users.sync();
 db.employees.sync();
 
 app.use(employeeRoutes);
+app.use(userRoutes);
 require('./routes/login')(app, passport); // load our routes and pass in our app and fully configured passport
 
 
