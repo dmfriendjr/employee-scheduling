@@ -37,6 +37,9 @@ module.exports = function(passport) {
           db.users.findOne({where: {username: username}}).then(data => {
             if (data) {
               //Username already exists
+              req.flash('username', req.body.username);
+              req.flash('companyName', req.body.companyName);
+              req.flash('email', req.body.email);
               return done(null, false, req.flash('signupMessage', 'Username is unavailable.'));
             } else {
               //Username is free to be used
