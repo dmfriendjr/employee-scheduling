@@ -56,7 +56,7 @@ router.post('/reset/:username/:token', (req, res) => {
     if (data) {
       data.updateAttributes({
         password: bcrypt.hashSync(req.body.password, null, null),
-        verificationToken: randomstring(16)
+        verificationToken: randomstring.generate(16)
       });
       req.flash('loginMessage', 'Password reset succesful. Please login with new password.');
       res.redirect('/login');
