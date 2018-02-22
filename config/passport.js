@@ -79,14 +79,14 @@ module.exports = function(passport) {
               return done(null, false, req.flash('loginMessage', 'Username or password was invalid.'));
             }
 
-            if(!data.dataValues.verified) {
-              //User not has verified their email
-              return done(null, false, req.flash('loginMessage', 'Please verify your email before logging in.'));
-            }
-
             if (!bcrypt.compareSync(password, data.dataValues.password)) {
               //Password was incorrect
               return done(null, false, req.flash('loginMessage', 'Username or password was invalid.'));
+            }
+
+            if(!data.dataValues.verified) {
+              //User not has verified their email
+              return done(null, false, req.flash('loginMessage', 'Please verify your email before logging in.'));
             }
 
             return done(null, data.dataValues);
