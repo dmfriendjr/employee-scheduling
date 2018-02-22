@@ -1,0 +1,33 @@
+<h1>Employees</h1>
+
+<form method="post" action="/employees">
+  <label for="name">Employee Name</label>
+  <input type="text" name="name">
+  <label for="phone_number">Phone Number</label>
+  <input type="text" name="phone_number">
+  <button type="submit">Add Employee</button>
+</form>
+
+<ul>
+{{#each employees}}
+<li id={{id}}>
+ {{name}} {{phone_number}} <button class="deleteEmployee">Delete</button>
+</li>
+{{/each}}
+</ul>
+
+<script>
+  $('.deleteEmployee').on('click', (event) => {
+    console.log(event.target.parentNode.id);
+    $.ajax({
+      method: 'delete',
+      url: '/employees',
+      contentType: 'application/json',
+      data: JSON.stringify({
+        id: event.target.parentNode.id
+      }),
+    }).then(() => {
+      location.reload();
+    })
+  });
+</script>
