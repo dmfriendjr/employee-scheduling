@@ -28,11 +28,10 @@ router.post('/employees', isLoggedIn, function(req, res) {
   }).catch(err => {
     if(err.errors[0].path === 'phone_number') {
       req.flash('entryError', 'Phone number is an invalid format. Please use 555-555-5555');
-      res.redirect('/manageEmployees');
     } else if (err.errors[0].path === 'email') {
       req.flash('entryError', 'Email is an invalid format. Please enter valid email.');
-      res.redirect('/manageEmployees');
     }
+    res.redirect('/manageEmployees');
   });
 });
 
@@ -42,7 +41,6 @@ router.delete('/employees', isLoggedIn, function(req, res) {
   });
 });
 
-// route middleware to make sure
 function isLoggedIn(req, res, next) {
 
 	// if user is authenticated in the session, carry on
