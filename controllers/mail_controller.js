@@ -27,5 +27,22 @@ module.exports = {
       }
       console.log('Message sent: %s', info.messageId);
     });
+  },
+
+  sendResetPasswordEmail: function(email, username, token) {
+    let mailOptions = {
+      from: '"Employee Scheduler" <foo@example.com>', 
+      to: email, 
+      subject: 'Scheduling App - Reset Password', 
+      text: `http://localhost:8080/reset/${username}/${token}`, 
+      html: `<a href="http://localhost:8080/reset/${username}/${token}`  
+    }
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+          return console.log(error);
+      }
+      console.log('Message sent: %s', info.messageId);
+    });
   }
 }

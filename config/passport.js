@@ -3,6 +3,7 @@ var LocalStrategy   = require('passport-local').Strategy;
 var bcrypt = require('bcrypt-nodejs');
 const db = require('../models');
 const mailer = require('../controllers/mail_controller');
+const randomstring = require('randomstring');
 
 module.exports = function(passport) {
     // =========================================================================
@@ -48,7 +49,7 @@ module.exports = function(passport) {
                 password: bcrypt.hashSync(password, null, null),
                 email: req.body.email,
                 company: req.body.companyName,
-                verificationToken: Math.floor(Math.random() * 100)
+                verificationToken: randomstring.generate(16) 
               };
               
               db.users.create(newUser).then((data) =>{
