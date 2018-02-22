@@ -31,8 +31,12 @@ app.use(passport.initialize());
 app.use(passport.session()); //Persistent login sessions
 app.use(flash());
 
+db.shifts.belongsTo(db.employees);
+
 db.users.sync();
 db.employees.sync();
+db.shifts.sync();
+
 
 app.use(employeeRoutes);
 app.use(userRoutes);

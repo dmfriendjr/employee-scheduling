@@ -17,7 +17,7 @@ module.exports = {
       from: '"Employee Scheduler" <foo@example.com>', 
       to: email, 
       subject: 'Scheduling App - Account Verification', 
-      text: `http://localhost:8080/verify/${email}/${token}`, 
+      text: `http://localhost:8080/verify/${username}/${token}`, 
       html: `<a href="http://localhost:8080/verify/${username}/${token}` 
     };
   
