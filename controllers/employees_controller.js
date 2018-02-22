@@ -7,15 +7,14 @@ db.employees.belongsTo(db.users);
 router.get('/manageEmployees', isLoggedIn, function(req, res) {
   db.employees.findAll({where: {userId: req.user.id}}).then(employees => {
     let parsedEmployees = employees.map(employee => employee.dataValues);
-    console.log(parsedEmployees);
-    res.render('manageEmployees', {employees: parsedEmployees});
+    res.render('manageEmployees', {employees: parsedEmployees, message: req.flash('entryError')});
   });
 });
 
 router.get('/employees', isLoggedIn, function(req, res) {
   db.employees.findAll({where: {userId: req.user.id}}).then(employees => {
     res.send(employees);
-  })
+  });
 });
 
 router.post('/employees', isLoggedIn, function(req, res) {
@@ -26,6 +25,11 @@ router.post('/employees', isLoggedIn, function(req, res) {
       }
       res.redirect('/manageEmployees'); 
     });
+  }).catch(err => {
+    if(err.errors[0].path === 'phone_number') {
+      req.flash('entryError', 'Phone number is an invalid format. Please use 555-555-5555');
+      res.redirect('/manageEmployees');
+    }
   });
 });
 

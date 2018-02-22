@@ -12,6 +12,9 @@ module.exports = (sequelize, DataTypes) => {
     phone_number: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        is: ["(^[+][0-9]+\ )?([0-9]{3}\-[0-9]{3}\-[0-9]{4})(\ x[0-9]+$)?"]
+      }
     }
   }, {
     timestamps: false
