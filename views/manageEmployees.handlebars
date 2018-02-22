@@ -6,13 +6,15 @@
   <input type="text" name="name">
   <label for="phone_number">Phone Number</label>
   <input type="text" name="phone_number">
+  <label for="email">Email</label>
+  <input type="Text" name="email">
   <button type="submit">Add Employee</button>
 </form>
 
 <ul>
 {{#each employees}}
 <li id={{id}}>
- {{name}} {{phone_number}} <button class="deleteEmployee">Delete</button>
+ {{name}} {{phone_number}} {{email}} <button class="deleteEmployee">Delete</button>
 </li>
 {{/each}}
 </ul>

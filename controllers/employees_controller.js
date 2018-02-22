@@ -18,7 +18,7 @@ router.get('/employees', isLoggedIn, function(req, res) {
 });
 
 router.post('/employees', isLoggedIn, function(req, res) {
-  db.employees.create({name: req.body.name, phone_number: req.body.phone_number}).then(employee => {
+  db.employees.create({name: req.body.name, phone_number: req.body.phone_number, email: req.body.email}).then(employee => {
     db.users.findOne({where: {id: req.user.id}}).then(employer => {
       if (employer) {
         employee.setUser(employer);
@@ -28,6 +28,9 @@ router.post('/employees', isLoggedIn, function(req, res) {
   }).catch(err => {
     if(err.errors[0].path === 'phone_number') {
       req.flash('entryError', 'Phone number is an invalid format. Please use 555-555-5555');
+      res.redirect('/manageEmployees');
+    } else if (err.errors[0].path === 'email') {
+      req.flash('entryError', 'Email is an invalid format. Please enter valid email.');
       res.redirect('/manageEmployees');
     }
   });
