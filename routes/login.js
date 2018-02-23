@@ -15,7 +15,6 @@ module.exports = function(app, passport) {
 	// =====================================
 	// show the login form
 	app.get('/login', function(req, res) {
-    console.log(req.body);
     // render the page and pass in any flash data if it exists
     if (req.user) {
       res.redirect('/profile');

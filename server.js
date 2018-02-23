@@ -6,6 +6,7 @@ const exphbs = require('express-handlebars');
 const db = require('./models');
 const employeeRoutes = require('./controllers/employees_controller');
 const userRoutes = require('./controllers/user_controller');
+const shiftRoutes = require('./controllers/shift_controller');
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -31,7 +32,7 @@ app.use(passport.initialize());
 app.use(passport.session()); //Persistent login sessions
 app.use(flash());
 
-db.shifts.belongsTo(db.employees);
+db.employees.hasMany(db.shifts);
 
 db.users.sync();
 db.employees.sync();
@@ -40,6 +41,7 @@ db.shifts.sync();
 
 app.use(employeeRoutes);
 app.use(userRoutes);
+app.use(shiftRoutes);
 require('./routes/login')(app, passport); // load our routes and pass in our app and fully configured passport
 
 
