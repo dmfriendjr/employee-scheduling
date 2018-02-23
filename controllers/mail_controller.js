@@ -6,8 +6,8 @@ const transporter = nodemailer.createTransport({
   host: 'smtp.ethereal.email',
   port: 587,
   auth: {
-      user: 'xkl5o2ajf4fqdv26@ethereal.email',
-      pass: '3nVUe6PB5heSz1E6p2'
+    user: 'xkl5o2ajf4fqdv26@ethereal.email',
+    pass: '3nVUe6PB5heSz1E6p2'
   }
 });
 
@@ -23,7 +23,7 @@ module.exports = {
   
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
-          return console.log(error);
+        return console.log(error);
       }
       console.log('Message sent: %s', info.messageId);
     });
@@ -36,13 +36,13 @@ module.exports = {
       subject: 'Scheduling App - Reset Password', 
       text: `http://localhost:8080/reset/${username}/${token}`, 
       html: `<a href="http://localhost:8080/reset/${username}/${token}`  
-    }
+    };
 
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
-          return console.log(error);
+        return console.log(error);
       }
       console.log('Message sent: %s', info.messageId);
     });
   }
-}
+};

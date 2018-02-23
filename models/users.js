@@ -1,3 +1,4 @@
+
 module.exports = (sequelize, DataTypes) => {
   return sequelize.define('users', {
     id: {
@@ -32,4 +33,4 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     timestamps: false
   });
-}
+};

@@ -13,17 +13,17 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        is: ["^[a-zA-Z0-9][a-zA-Z0-9._-]*@[a-zA-Z0-9][a-zA-Z0-9._-]*\\.[a-zA-Z]{2,4}$"]
+        is: ['^[a-zA-Z0-9][a-zA-Z0-9._-]*@[a-zA-Z0-9][a-zA-Z0-9._-]*\\.[a-zA-Z]{2,4}$']
       }
     },
     phone_number: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        is: ["(^[+][0-9]+\ )?([0-9]{3}\-[0-9]{3}\-[0-9]{4})(\ x[0-9]+$)?"]
+        is: ['(^[+][0-9]+\ )?([0-9]{3}\-[0-9]{3}\-[0-9]{4})(\ x[0-9]+$)?']
       }
     }
   }, {
     timestamps: false
   });
-}
+};

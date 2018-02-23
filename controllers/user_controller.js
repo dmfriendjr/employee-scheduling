@@ -44,10 +44,10 @@ router.get('/reset/:username/:token', (req, res) => {
     if (data) {
       res.render('resetForm');
     } else {
-      req.flash('loginMessage', 'Invalid password reset token. Please contact support.')
+      req.flash('loginMessage', 'Invalid password reset token. Please contact support.');
       res.redirect('/login');
     }
-  })
+  });
 });
 
 router.post('/reset/:username/:token', (req, res) => {
@@ -61,10 +61,10 @@ router.post('/reset/:username/:token', (req, res) => {
       req.flash('loginMessage', 'Password reset succesful. Please login with new password.');
       res.redirect('/login');
     } else {
-      req.flash('loginMessage', 'Invalid password reset token. Please contact support.')
+      req.flash('loginMessage', 'Invalid password reset token. Please contact support.');
       res.redirect('/login');
     }
-  })  
-})
+  });
+});
 
 module.exports = router;
