@@ -7,13 +7,16 @@ router.get('/shifts/:month/:day/:year', isLoggedIn, function(req, res) {
     let employeesShiftPromises = employees.map(employee => {
       return employee.getShifts();
     });
-
+    let requestedDate = new Date(parseInt(req.params.year), parseInt(req.params.month), parseInt(req.params.day));
     Promise.all(employeesShiftPromises).then(shifts => {
       let shiftData = [];
       
       shifts.forEach(shiftArr => {
         shiftArr.map(shift => {
-          shiftData.push(shift);
+          let shiftDate = new Date(shift.start_date);
+          if (shiftDate.toDateString() === requestedDate.toDateString()) {
+            shiftData.push(shift);
+          }
         });
       })
       res.send(shiftData);
