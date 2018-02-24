@@ -6,7 +6,6 @@ const bcrypt = require('bcrypt-nodejs');
 const mailer = require('./mail_controller');
 const randomstring = require('randomstring');
 
-
 router.get('/verify/:username/:token', (req, res) => {
   db.users.findOne({where: {username: req.params.username, verificationToken: req.params.token}}).then( data => {
     if (data) {
