@@ -49,8 +49,8 @@ module.exports = function(passport) {
             req.flash('companyName', req.body.companyName);
             req.flash('email', req.body.email);
             return done(null, false, req.flash('signupMessage',
-              `Must be at least 8 characters long and contain uppercase letter, 
-              lowercase letter, a number, and one special character.`));
+              `Password must be at least 8 characters long and contain 
+              uppercase letter, lowercase letter, a number, and one special character.`));
           }
 
           //Username is free to be used
