@@ -106,7 +106,9 @@ module.exports = function(passport) {
 
         if(!data.dataValues.verified) {
           //User not has verified their email
-          return done(null, false, req.flash('loginMessage', 'Please verify your email before logging in.'));
+          return done(null, false, req.flash('loginMessage', 
+            `Please verify your email before logging in.
+            <a href="/resendVerification/${data.dataValues.username}">Resend Verification Email</a>`));
         }
 
         return done(null, data.dataValues);
