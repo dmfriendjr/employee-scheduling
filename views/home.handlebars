@@ -1,4 +1,49 @@
-<a href="/login">Login</a>
-<a href="/signup">Signup</a>
-<a href="/profile">Profile</a>
-<h1>Home</h1>
+<div id = "login-background"></div>
+
+<div class = "container-login">
+  <div class = "wrap-login">
+    <div class = "login-pic col-md-6 col-s-12">
+      <img src="../../styles/assets/login-header.png" alt="IMG">
+    </div>
+      <form action="/login" method="POST" class="col-md-6 col-s-12">
+        <span class="login-form-title">
+          Member Login
+        </span>
+
+        <div class = "login-input-wrap">
+          <input class="login-input" type="text" name="username" placeholder="Username">
+        </div>
+
+        <div class = "login-input-wrap">
+          <input class="login-input" type="password" name="password" placeholder="Password">
+        </div>
+
+        <div class = "container-login-form-btn">
+          <button class="login-btn" type="submit">
+            Login
+          </button>
+        </div>
+
+        <div class="text-center">
+          <span>
+            Forgot
+          </span>
+          <a href="#">
+            Username / Password?
+          </a>
+        </div>
+
+        <div class="text-center">
+          <a href="/signup">
+          Create your Account
+          </a>
+        </div>
+      </form>
+
+
+      {{!-- <h1>Home</h1>
+      <a href="/login">Login</a>
+      <a href="/signup">Signup</a>
+      <a href="/profile">Profile</a> --}}
+
+</div>
