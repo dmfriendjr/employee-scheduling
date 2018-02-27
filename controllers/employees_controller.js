@@ -8,7 +8,14 @@ db.employees.hasMany(db.shifts);
 router.get('/manageEmployees', isLoggedIn, function(req, res) {
   db.employees.findAll({where: {userId: req.user.id}}).then(employees => {
     let parsedEmployees = employees.map(employee => employee.dataValues);
-    res.render('manageEmployees', {employees: parsedEmployees, message: req.flash('entryError')});
+    res.render('manageEmployees', 
+      {
+        employees: parsedEmployees, 
+        message: req.flash('entryError'),
+        employeeName: req.flash('employeeName'),
+        employeePhone: req.flash('employeePhone'),
+        employeeEmail: req.flash('employeeEmail')
+      });
   });
 });
 
@@ -27,6 +34,10 @@ router.post('/employees', isLoggedIn, function(req, res) {
       res.redirect('/manageEmployees'); 
     });
   }).catch(err => {
+    req.flash('employeeName', req.body.name);
+    req.flash('employeePhone', req.body.phone_number);
+    req.flash('employeeEmail', req.body.email);
+
     if(err.errors[0].path === 'phone_number') {
       req.flash('entryError', 'Phone number is an invalid format. Please use 555-555-5555');
     } else if (err.errors[0].path === 'email') {

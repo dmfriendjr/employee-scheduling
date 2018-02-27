@@ -3,18 +3,18 @@
 {{message}}
 <form method="post" action="/employees">
   <label for="name">Employee Name</label>
-  <input type="text" name="name">
+  <input type="text" name="name" value={{employeeName}}>
   <label for="phone_number">Phone Number</label>
-  <input type="text" name="phone_number">
+  <input type="text" name="phone_number" value={{employeePhone}}>
   <label for="email">Email</label>
-  <input type="Text" name="email">
+  <input type="Text" name="email" value={{employeeEmail}}>
   <button type="submit">Add Employee</button>
 </form>
 
     
 <ul>
 {{#each employees}}
-<ul id={{id}}>
+<li id={{id}}>
  {{name}} {{phone_number}} {{email}} <button class="deleteEmployee">Delete</button>
 </li>
 {{/each}}
@@ -46,8 +46,7 @@ let testVar = "Bob";
 
       timetable.addEvent('Bartender', 'Jerry', new Date(2015,7,17,9,00), new Date(2015,7,17,11,30), { url: '#' });
       timetable.addEvent('Server', testVar, new Date(2015,7,17,9,00), new Date(2015,7,17,11,30), { url: '#' });
-      
-
+     
       var renderer = new Timetable.Renderer(timetable);
       renderer.draw('.timetable');
     </script>
