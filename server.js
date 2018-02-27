@@ -42,7 +42,7 @@ db.shifts.sync();
 app.use(employeeRoutes);
 app.use(userRoutes);
 app.use(shiftRoutes);
-require('./routes/login')(app, passport); // load our routes and pass in our app and fully configured passport
+require('./controllers/login_controller')(app, passport); // load our routes and pass in our app and fully configured passport
 
 
 app.listen(port);

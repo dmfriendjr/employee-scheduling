@@ -31,6 +31,7 @@ router.post('/employees', isLoggedIn, function(req, res) {
     } else if (err.errors[0].path === 'email') {
       req.flash('entryError', 'Email is an invalid format. Please enter valid email.');
     }
+
     res.redirect('/manageEmployees');
   });
 });

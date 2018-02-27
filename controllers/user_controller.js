@@ -11,10 +11,10 @@ router.get('/verify/:username/:token', (req, res) => {
     if (data) {
       data.updateAttributes({verified: true});
       req.flash('loginMessage', 'Email verified. Please login.');
-      res.redirect('/login');
+      res.redirect('/');
     } else {
       req.flash('loginMessage', 'Invalid verification token. Please contact support.');
-      res.redirect('/login');
+      res.redirect('/');
     }
   });
 });
@@ -52,7 +52,7 @@ router.get('/resendVerification/:username', (req, res) => {
       user.dataValues.username, verificationToken);
     user.updateAttributes({verificationToken: verificationToken});
     req.flash('loginMessage', 'Verification email sent to email on file for account.');
-    res.redirect('/login');
+    res.redirect('/');
   });
 });
 
@@ -62,7 +62,7 @@ router.get('/reset/:username/:token', (req, res) => {
       res.render('resetForm');
     } else {
       req.flash('loginMessage', 'Invalid password reset token. Please contact support.');
-      res.redirect('/login');
+      res.redirect('/');
     }
   });
 });
@@ -75,10 +75,10 @@ router.post('/reset/:username/:token', (req, res) => {
         verificationToken: randomstring.generate(16)
       });
       req.flash('loginMessage', 'Password reset succesful. Please login with new password.');
-      res.redirect('/login');
+      res.redirect('/');
     } else {
       req.flash('loginMessage', 'Invalid password reset token. Please contact support.');
-      res.redirect('/login');
+      res.redirect('/');
     }
   });
 });
