@@ -4,6 +4,7 @@ var bcrypt = require('bcrypt-nodejs');
 const db = require('../models');
 const mailer = require('../controllers/mail_controller');
 const randomstring = require('randomstring');
+const passwordRegex = /(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
 
 module.exports = function(passport) {
   // =========================================================================
@@ -43,6 +44,15 @@ module.exports = function(passport) {
           req.flash('email', req.body.email);
           return done(null, false, req.flash('signupMessage', 'Username is unavailable.'));
         } else {
+          if (!password.match(passwordRegex)) {
+            req.flash('username', req.body.username);
+            req.flash('companyName', req.body.companyName);
+            req.flash('email', req.body.email);
+            return done(null, false, req.flash('signupMessage',
+              `Password must be at least 8 characters long and contain 
+              uppercase letter, lowercase letter, a number, and one special character.`));
+          }
+
           //Username is free to be used
           let newUser = {
             username: username,
@@ -58,6 +68,15 @@ module.exports = function(passport) {
             return done(null, false, req.flash('signupMessage', 
               `Signup successful. Please verify your email before logging in. 
               <a href="http://localhost:8080/verify/${newUser.username}/${newUser.verificationToken}">TESTING ONLY VERIFICATION LINK</a>`));
+          }).catch(err => {
+            req.flash('username', req.body.username);
+            req.flash('companyName', req.body.companyName);
+            req.flash('email', req.body.email);
+
+            if (err.errors[0].path === 'email') {
+              return done(null, false, req.flash('signupMessage', 
+                `Please enter a valid email address.`));
+            } 
           });
         }
       }).catch(error => {
@@ -87,7 +106,9 @@ module.exports = function(passport) {
 
         if(!data.dataValues.verified) {
           //User not has verified their email
-          return done(null, false, req.flash('loginMessage', 'Please verify your email before logging in.'));
+          return done(null, false, req.flash('loginMessage', 
+            `Please verify your email before logging in.
+            <a href="/resendVerification/${data.dataValues.username}">Resend Verification Email</a>`));
         }
 
         return done(null, data.dataValues);
