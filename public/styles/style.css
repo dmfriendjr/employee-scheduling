@@ -1,11 +1,32 @@
 * {
   box-sizing: border-box;
-  font-family: 'Poppins'
+  font-family: 'Poppins';
+  font-size: 14px;
 }
 
 input {
 	outline: none;
 	border: none;
+}
+
+a {
+	font-family: "Poppins";
+	font-size: 14px;
+	line-height: 1.7;
+	margin: 0px;
+	transition: all 0.4s;
+	-webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+}
+
+a:focus {
+	outline: none !important;
+}
+
+.link:hover {
+  text-decoration: none;
+  color: #57b846;
 }
 
 textarea {
@@ -16,6 +37,26 @@ textarea {
 textarea:focus, input:focus {
   border-color: transparent !important;
 }
+
+input:focus::-webkit-input-placeholder { color:transparent; }
+input:focus:-moz-placeholder { color:transparent; }
+input:focus::-moz-placeholder { color:transparent; }
+input:focus:-ms-input-placeholder { color:transparent; }
+
+textarea:focus::-webkit-input-placeholder { color:transparent; }
+textarea:focus:-moz-placeholder { color:transparent; }
+textarea:focus::-moz-placeholder { color:transparent; }
+textarea:focus:-ms-input-placeholder { color:transparent; }
+
+input::-webkit-input-placeholder { color: #999999; }
+input:-moz-placeholder { color: #999999; }
+input::-moz-placeholder { color: #999999; }
+input:-ms-input-placeholder { color: #999999; }
+
+textarea::-webkit-input-placeholder { color: #999999; }
+textarea:-moz-placeholder { color: #999999; }
+textarea::-moz-placeholder { color: #999999; }
+textarea:-ms-input-placeholder { color: #999999; }
 
 button {
 	outline: none !important;
@@ -54,10 +95,10 @@ button:hover {
 
 .wrap-login {
   background: rgba(255, 255, 255, 0.80);
-  border-radius: 3px;
+  border-radius: 10px;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
-  z-index: 2;
-  height: 50vh;
+  z-index: 1;
+  height: 65vh;
   overflow: hidden;
   display: -webkit-box;
   display: -webkit-flex;
@@ -66,14 +107,10 @@ button:hover {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  align-content: center;
   padding: 10px;
-  width: 50vw;
+  width: 65vw;
 }
-
-
-/* .login-pic {
-  width: 50%;
-} */
 
 .login-pic img {
   max-width: 100%;
@@ -93,17 +130,82 @@ button:hover {
 .login-input-wrap {
   width: 100%;
   margin-bottom: 10px; 
+  position: relative;
 }
 
 .login-input {
-  font-family: Poppins-Medium;
+  font-family: "Poppins";
   font-size: 15px;
   line-height: 1.5;
+  height: 50px;
   display: block;
   width: 100%;
-  padding: 0 30px;
+  padding: 0 60px;
   border-radius: 25px;
 }
+
+.focus-login-input {
+  display: block;
+  position: absolute;
+  border-radius: 25px;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0px 0px 0px 0px;
+  color: rgba(87,184,70, 0.8);
+}
+
+.login-input:focus + .focus-login-input {
+  -webkit-animation: anim-shadow 0.5s ease-in-out forwards;
+  animation: anim-shadow 0.5s ease-in-out forwards;
+}
+
+@-webkit-keyframes anim-shadow {
+  to {
+    box-shadow: 0px 0px 70px 25px;
+    opacity: 0;
+  }
+}
+
+@keyframes anim-shadow {
+  to {
+    box-shadow: 0px 0px 70px 25px;
+    opacity: 0;
+  }
+}
+
+.symbol-login-input {
+  font-size: 15px;
+
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  border-radius: 25px;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding-left: 35px;
+  pointer-events: none;
+  color: #666666;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.login-input:focus + .focus-login-input + .symbol-login-input {
+  color: #57b846;
+  padding-left: 28px;
+}
+
 
 .container-login-form-btn {
   width: 100%;
@@ -122,7 +224,6 @@ button:hover {
   line-height: 1.5;
   color: #fff;
   text-transform: uppercase;
-
   width: 100%;
   height: 50px;
   border-radius: 25px;
@@ -144,5 +245,4 @@ button:hover {
 
 .login-btn:hover {
   background: #333333;
-}
 }
