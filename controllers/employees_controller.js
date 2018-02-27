@@ -3,6 +3,7 @@ const db = require('../models');
 
 const router = express.Router();
 db.employees.belongsTo(db.users);
+db.employees.hasMany(db.shifts);
 
 router.get('/manageEmployees', isLoggedIn, function(req, res) {
   db.employees.findAll({where: {userId: req.user.id}}).then(employees => {
