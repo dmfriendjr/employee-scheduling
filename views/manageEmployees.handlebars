@@ -20,6 +20,20 @@
 {{/each}}
 </ul>
 <button class="addShift">Add Shift</button>
+
+<form action="/shifts" method="post">
+  <select name="employee">
+    {{#each employees}}
+    <option value={{id}}>{{name}}</option>
+    {{/each}}
+  </select>
+  <input type="text" name="shift_title" />
+  <input type="datetime-local" name="start_date" />
+  <input type="datetime-local" name="end_date" />
+  <button type="submit">Add</button>
+</form>
+
+
 <div class="timetable"></div>
 
 <script>
@@ -50,9 +64,8 @@
 
     timetable.addEvent('Server', employeeNames[0], new Date(2015,7,17,9,00), new Date(2015,7,17,11,30), { url: '#' });
      
-      var renderer = new Timetable.Renderer(timetable);
-      renderer.draw('.timetable');
+    var renderer = new Timetable.Renderer(timetable);
+    renderer.draw('.timetable');
   });
-    </script>
+</script>
 
-    
