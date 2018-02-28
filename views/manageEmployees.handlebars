@@ -1,4 +1,5 @@
 <h1>Employees</h1>
+{{!-- <a href="/timetable">Timetable</a> --}}
 {{message}}
 <form method="post" action="/employees">
   <label for="name">Employee Name</label>
@@ -8,9 +9,8 @@
   <label for="email">Email</label>
   <input type="Text" name="email" value={{employeeEmail}}>
   <button type="submit">Add Employee</button>
+</form>
 
-<<<<<<< HEAD
-=======
     
 <ul>
 {{#each employees}}
@@ -19,20 +19,8 @@
 </li>
 {{/each}}
 </ul>
-<div class="timetable" method="post" action="/employees"></div>
->>>>>>> a702dfb9e4ea3f68a7c34e7c043ac1b4eeeb14a8
+<div class="timetable"></div>
 
-
-  <ul>
-    {{#each employees}}
-    <ul id={{id}}>
-      {{name}} {{phone_number}} {{email}}
-      <button class="deleteEmployee">Delete</button>
-      </li>
-      {{/each}}
-    </ul>
-    <div class="timetable" method="get" action="/employees"></div>
-</form>
 <script>
   $('.deleteEmployee').on('click', (event) => {
     console.log(event.target.parentNode.id);
@@ -59,28 +47,14 @@
 
     let employeeNames = employees.map(employees => employees.name);
 
-    console.log(employeeNames);
     var timetable = new Timetable();
-
-<<<<<<< HEAD
-    timetable.setScope(0, 23)
-
     timetable.addLocations(employeeNames);
-=======
-      timetable.addEvent('Bartender', 'Jerry', new Date(2015,7,17,9,00), new Date(2015,7,17,11,30), { url: '#' });
-      timetable.addEvent('Server', testVar, new Date(2015,7,17,9,00), new Date(2015,7,17,11,30), { url: '#' });
+
+    timetable.addEvent('Server', employeeNames[0], new Date(2015,7,17,9,00), new Date(2015,7,17,11,30), { url: '#' });
      
       var renderer = new Timetable.Renderer(timetable);
       renderer.draw('.timetable');
-    </script>
->>>>>>> a702dfb9e4ea3f68a7c34e7c043ac1b4eeeb14a8
-
-    timetable.addEvent('Bartender', 'Jerry', new Date(2015, 7, 17, 9, 00), new Date(2015, 7, 17, 11, 30), { url: '#' });
-    timetable.addEvent('Server', employeeNames[0], new Date(2015, 7, 17, 9, 00), new Date(2015, 7, 17, 11, 30), { url: '#' });
-
-
-    var renderer = new Timetable.Renderer(timetable);
-    renderer.draw('.timetable');
-
   });
-</script>
+    </script>
+
+    
