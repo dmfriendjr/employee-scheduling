@@ -41,7 +41,7 @@ router.post('/resetRequest', (req, res) => {
       req.flash('resetMessage', 'Username does not match our records');
     }
 
-    res.redirect('/resetRequest');
+    res.redirect('/');
   });
 });
 
