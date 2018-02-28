@@ -20,7 +20,7 @@ router.get('/verify/:username/:token', (req, res) => {
 });
 
 router.get('/resetRequest', (req, res) => {
-  res.render('resetRequest', {message: req.flash('resetMessage')});
+  res.render('home', {message: req.flash('resetMessage'), showResetForm: true});
 });
 
 router.post('/resetRequest', (req, res) => {
@@ -41,7 +41,7 @@ router.post('/resetRequest', (req, res) => {
       req.flash('resetMessage', 'Username does not match our records');
     }
 
-    res.redirect('/resetRequest');
+    res.redirect('/');
   });
 });
 
