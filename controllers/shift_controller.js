@@ -26,7 +26,8 @@ router.get('/shifts/:month/:day/:year', isLoggedIn, function(req, res) {
 }); 
 
 router.post('/shifts', isLoggedIn, (req, res) =>{
-  db.employees.findOne({where: {id: req.body.employeeId}}).then(employee => {
+  console.log(req.body);
+  db.employees.findOne({where: {id: req.body.employee}}).then(employee => {
     db.shifts.create({
       start_date: req.body.start_date,
       end_date: req.body.end_date,
@@ -34,7 +35,7 @@ router.post('/shifts', isLoggedIn, (req, res) =>{
     }).then(shift => {
       if (employee) {
         employee.addShift(shift);
-        res.end();
+        res.redirect('/manageEmployees');
       }
     });
   });
