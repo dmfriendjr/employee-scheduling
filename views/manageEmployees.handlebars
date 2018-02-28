@@ -19,6 +19,7 @@
 </li>
 {{/each}}
 </ul>
+<button class="addShift">Add Shift</button>
 <div class="timetable"></div>
 
 <script>
@@ -40,10 +41,6 @@
     method: 'GET',
     url: '/employees',
   }).then((employees) => {
-
-
-
-
 
     let employeeNames = employees.map(employees => employees.name);
 
