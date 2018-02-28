@@ -7,6 +7,9 @@
     </div>
     <div class="col-md-6 col-s-12">
       <form action="/login" method="POST">
+        {{#if showResetForm}}
+        <h1>Reset</h1>
+        {{else}}
         <h4 class="login-form-title">
           Member Login
         </h4>
@@ -51,6 +54,7 @@
       </form>
       </div>
 
+        {{/if}}
       {{!-- <h1>Home</h1>
       <a href="/login">Login</a>
       <a href="/signup">Signup</a>
