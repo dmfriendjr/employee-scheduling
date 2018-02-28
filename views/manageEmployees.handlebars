@@ -40,14 +40,15 @@
     method: 'GET',
     url: '/employees',
   }).then((employees) => {
-    for (i = 0; i < employees; i++);
-    console.log(employees[0].name);
+
+
 
 
 
     let employeeNames = employees.map(employees => employees.name);
 
     var timetable = new Timetable();
+    timetable.setScope(0,23);
     timetable.addLocations(employeeNames);
 
     timetable.addEvent('Server', employeeNames[0], new Date(2015,7,17,9,00), new Date(2015,7,17,11,30), { url: '#' });
