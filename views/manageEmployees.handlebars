@@ -25,7 +25,7 @@
   $('.deleteEmployee').on('click', (event) => {
     console.log(event.target.parentNode.id);
     $.ajax({
-      method: 'GET',
+      method: 'DELETE',
       url: '/employees',
       contentType: 'application/json',
       data: JSON.stringify({
