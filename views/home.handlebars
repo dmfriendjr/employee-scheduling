@@ -2,14 +2,61 @@
 
 <div class = "container-login">
   <div class = "wrap-login">
+
+    {{!-- Login Logo Image --}}
     <div class = "login-pic col-md-6 col-s-12">
-      <img src="../../styles/assets/login-header.png" alt="IMG">
+      <img src="../../styles/assets/login-header.png" alt="IMG" class="img-responsive">
     </div>
+
+    {{!-- Form Div --}}
     <div class="col-md-6 col-s-12">
+
+    {{!-- Reset Password --}}
+    {{#if showResetForm}}
+
+      <h4 class="reset-form-title">
+         Password Reset
+      </h4>
+
+      <p class="text-center padding-bottom-10">Enter your username below and we'll send you password reset instructions.</p>
+
+      {{message}}
+      
+      <form action="/resetRequest" method="POST">
+        <div class="login-input-wrap">
+          <input class="login-input" type="text" name="username" placeholder="Username">
+          <span class="focus-login-input"></span>
+          <span class="symbol-login-input">
+            <i class="far fa-user"></i>
+          </span>
+        </div>
+
+          <div class="container-login-form-btn">
+            <button type="submit" class="login-btn">Reset Password</button>
+          </div>
+
+      </form>
+
+      <div class="text-center">
+        <a class="link" href="/">
+          Back to Login
+        </a>
+      </div>
+      
+      <div class="text-center">
+        <a class="link" href="/signup">
+          Create your Account
+          <i class="fas fa-long-arrow-alt-right"></i>
+        </a>
+      </div>
+
+    {{!-- Create Account --}}
+    {{!-- {{else if showCreateUser}} --}}
+
+
+    {{!-- Login Page --}}
+    {{else}}
       <form action="/login" method="POST">
-        {{#if showResetForm}}
-        <h1>Reset</h1>
-        {{else}}
         <h4 class="login-form-title">
           Member Login
         </h4>
@@ -37,21 +84,20 @@
         </div>
 
         <div class="text-center">
-          <span>
-            Forgot
-          </span>
           <a class="link" href="/resetRequest">
-            Password?
+            Forgot Password?
           </a>
         </div>
 
         <div class="text-center">
           <a class="link" href="/signup">
-          Create your Account
-            <i class="fas fa-long-arrow-alt-right"></i>
+          Create your Account <i class="fas fa-long-arrow-alt-right"></i>
           </a>
         </div>
+      {{/if}}
       </form>
       </div>
+  </div>
+</div>
 
-        {{/if}}
+
