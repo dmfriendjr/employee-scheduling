@@ -47,7 +47,6 @@ View Schedule Date:<input type="text" id="datepicker">
   let timetable = new Timetable();
   
   var renderer = new Timetable.Renderer(timetable);
-  timetable.addLocations(['D']);
   timetable.setScope(8, 7);
 $("#datepicker").datepicker({
   onSelect: function(dateText) {
@@ -61,6 +60,7 @@ $("#datepicker").datepicker({
         name: employee.name,
         id: employee.id
       }));
+      timetable.addLocations(employeeNames);
 
       $.ajax({
         method: 'GET',
