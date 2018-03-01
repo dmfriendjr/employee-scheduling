@@ -243,6 +243,7 @@ button:hover {
   -o-transition: all 0.4s;
   -moz-transition: all 0.4s;
   transition: all 0.4s;
+  margin-bottom: 10px;
 }
 
 .login-btn:hover {
@@ -265,4 +266,17 @@ button:hover {
 
 .footer-link:hover {
   color: white;
+}
+
+.reset-form-title {
+  font-family: "Poppins";
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  width: 100%;
+  display: block;
+}
+
+.padding-bottom-10 {
+  padding-bottom: 10px;
 }
