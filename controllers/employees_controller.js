@@ -10,6 +10,7 @@ router.get('/manageEmployees', isLoggedIn, function(req, res) {
     let parsedEmployees = employees.map(employee => employee.dataValues);
     res.render('manageEmployees', 
       {
+        user: req.user,
         employees: parsedEmployees, 
         message: req.flash('entryError'),
         employeeName: req.flash('employeeName'),
