@@ -1,3 +1,18 @@
+<nav class="navbar navbar-default">
+  <h3 class="navbar-text navbar-left">{{user.company}}</h3>
+  <p class="navbar-text navbar-right">Signed in as {{user.username}}</p>
+
+
+  {{!-- <form method="get" action="/logout">
+    <button type="submit">
+      <i class="fas fa-sign-out-alt"></i>
+       Logout
+    </button>
+  </form> --}}
+</nav>
+
+
+
 <h3>Company: {{user.company}}</h1>
 <h3>Email: {{user.email}}</h3>
 <h3>Username: {{user.username}}</h3>
@@ -6,6 +21,4 @@
   <button type="submit">Manage Employees</button>
 </form>
 
-<form method="get" action="/logout">
-<button type="submit">Logout</button>
-</form>
+

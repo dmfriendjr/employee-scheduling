@@ -30,15 +30,15 @@ router.post('/resetRequest', (req, res) => {
         let token = randomstring.generate(16);
         mailer.sendResetPasswordEmail(data.dataValues.email, data.dataValues.username, token);
         data.updateAttributes({verificationToken: token});
-        req.flash('resetMessage', 'Password reset email sent.');
+        req.flash('resetMessage', '<p class="success-message text-center">Password reset email sent.</p>');
       } else {
         //User account is not verified, can't reset password
         req.flash('resetMessage', 
-          `Account is not verified. Please verify email before reseting password.
-          <a href="/resendVerification/${data.dataValues.username}>Resend Verification</a>`);
+          `<p class="error-message text-center">Account is not verified. Please verify email before reseting password.
+          <a href="/resendVerification/${data.dataValues.username}>Resend Verification</a></p>`);
       }
     } else {
-      req.flash('resetMessage', 'Username does not match our records');
+      req.flash('resetMessage', '<p class="error-message text-center">Username does not match our records</p>');
     }
 
     res.redirect('/');

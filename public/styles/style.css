@@ -5,8 +5,8 @@
 }
 
 input {
-	outline: none;
-	border: none;
+  outline: none;
+	border: 1px solid #999999;
 }
 
 a:focus {
@@ -74,7 +74,7 @@ button:hover {
   display: block;
   filter: blur(1.5px);
   -webkit-filter: blur(1.5px);
-  height: 100vh;
+  height: 100%;
   left: 0;
   position: fixed;
   right: 0;
@@ -108,7 +108,7 @@ button:hover {
   justify-content: space-between;
   align-content: center;
   padding: 70px 10px;;
-  width: 65vw;
+  width: 65%;
   margin-top: 30px;
 }
 
@@ -156,6 +156,7 @@ button:hover {
   height: 100%;
   box-shadow: 0px 0px 0px 0px;
   color: rgba(87,184,70, 0.8);
+  
 }
 
 .login-input:focus + .focus-login-input {
@@ -279,4 +280,16 @@ button:hover {
 
 .padding-bottom-10 {
   padding-bottom: 10px;
+}
+
+.error-message {
+  color: red;
+  margin-left:10px;
+  margin-bottom:10px;
+}
+
+.success-message {
+  color: #57b846;
+  margin-left:10px;
+  margin-bottom:10px;
 }
