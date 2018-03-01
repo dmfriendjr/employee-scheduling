@@ -43,10 +43,52 @@ View Schedule Date:<input type="text" id="datepicker">
 <div class="timetable"></div>
 
 <script>
-//let date = $(function () {
-//    $("#datepicker").datepicker();
-//  });
-let date = "03/01/2018";
+ 
+  let timetable = new Timetable();
+  
+  var renderer = new Timetable.Renderer(timetable);
+  timetable.addLocations(['D']);
+  timetable.setScope(8, 7);
+  let date = "03/01/2018";
+$("#datepicker").datepicker({
+  onSelect: function(dateText) {
+  $.ajax({
+      method: 'GET',
+      url: '/employees',
+    }).then((employees) => {
+
+      let employeeNames = employees.map(employee => employee.name);
+      let employeeData = employees.map(employee => ({
+        name: employee.name,
+        id: employee.id
+      }));
+
+      $.ajax({
+        method: 'GET',
+        url: '/shifts/' + dateText,
+      }).then((shifts) => {
+        console.log(shifts)
+        console.log(employeeNames);
+
+
+        employeeData.forEach(employee => {
+          let empShifts = shifts.filter(shift => shift.employeeId === employee.id);
+          empShifts.forEach(shift => {
+            let start = moment(shift.start_date);
+            let end = moment(shift.end_date);
+            console.log('Shift is:', shift);
+            console.log('employee is:', employee);
+            console.log(timetable);
+            timetable.addEvent(shift.shift_title, employee.name, new Date(start.year(), start.month(), start.day(), start.hour(), start.minute()),
+            new Date(end.year(), end.month(), end.day(), end.hour(), end.minute()), { url: '#' });
+            //timetable.addEvent(shift.shift_title, employee.name, new Date(2018, 7, 17, 9, 30), new Date(2018, 7, 17, 11, 30), { url: '#' }) 
+          })
+        });
+        renderer.draw('.timetable');
+      });
+    });
+    }
+});;
 
   $('.deleteEmployee').on('click', (event) => {
     console.log(event.target.parentNode.id);
@@ -62,31 +104,5 @@ let date = "03/01/2018";
     });
   });
 
-  $.ajax({
-    method: 'GET',
-    url: '/employees',
-  }).then((employees) => {
-
-    let employeeNames = employees.map(employees => employees.name);
-
-
-    let timetable = new Timetable();
-    timetable.setScope(8, 7);
-    timetable.addLocations(employeeNames);
-    $.ajax({
-      method: 'GET',
-      url: '/shifts/' + date,
-    }).then((shifts) => {
-      console.log(shifts)
-
-      var timetable = new Timetable();
-      timetable.setScope(8,7);
-      timetable.addLocations(employeeNames);
-
-      timetable.addEvent('Server', employeeNames[0], new Date(2015, 7, 17, 9, 00), new Date(2015, 7, 17, 11, 30), { url: '#' });
-
-      var renderer = new Timetable.Renderer(timetable);
-      renderer.draw('.timetable');
-    });
-  });
+ 
 </script>
