@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../models');
+const moment = require('moment-timezone');
 
 
 router.get('/shifts/:month/:day/:year', isLoggedIn, function(req, res) {
@@ -8,15 +9,25 @@ router.get('/shifts/:month/:day/:year', isLoggedIn, function(req, res) {
     let employeesShiftPromises = employees.map(employee => {
       return employee.getShifts();
     });
-    let requestedDate = new Date(parseInt(req.params.year), parseInt(req.params.month), parseInt(req.params.day));
+    // let requestedDate = new Date(parseInt(req.params.year), parseInt(req.params.month), parseInt(req.params.day));
+    let requestedDate = moment(`${req.params.year}-${req.params.month}-${req.params.day}`, 'YYYY-MM-DD');
     Promise.all(employeesShiftPromises).then(shifts => {
       let shiftData = [];
       
       shifts.forEach(shiftArr => {
         shiftArr.map(shift => {
-          let shiftDate = new Date(shift.start_date);
-          if (shiftDate.toDateString() === requestedDate.toDateString()) {
-            shiftData.push(shift);
+          let shiftDate2 = moment.utc(shift.start_date);
+          if (shiftDate2.tz('America/New_York').format('YYYY MM DD') === requestedDate.format('YYYY MM DD')) {
+            //Matched, need to convert timezones
+            let convertedShift = {
+              id: shift.id,
+              start_date: moment.utc(shift.start_date).tz('America/New_York').format(),
+              end_date: moment.utc(shift.end_date).tz('America/New_York').format(),
+              shift_title: shift.shift_title,
+              employeeId: shift.employeeId
+            };
+
+            shiftData.push(convertedShift);
           }
         });
       });
@@ -26,11 +37,13 @@ router.get('/shifts/:month/:day/:year', isLoggedIn, function(req, res) {
 }); 
 
 router.post('/shifts', isLoggedIn, (req, res) =>{
-  console.log(req.body);
   db.employees.findOne({where: {id: req.body.employee}}).then(employee => {
+    let startDate = moment.tz(req.body.start_date, 'America/New_York');
+    console.log('Pre-utc time:', startDate.format());
+    let endDate = moment.tz(req.body.end_date, 'America/New_York'); 
     db.shifts.create({
-      start_date: req.body.start_date,
-      end_date: req.body.end_date,
+      start_date: startDate.tz('UTC').format(), 
+      end_date: endDate.tz('UTC').format(),
       shift_title: req.body.shift_title
     }).then(shift => {
       if (employee) {
@@ -49,6 +62,7 @@ router.put('/shifts', isLoggedIn, (req, res) => {
     }
   });
 });
+
 
 function isLoggedIn(req, res, next) {
 

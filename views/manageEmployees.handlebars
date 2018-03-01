@@ -1,5 +1,5 @@
 <h1>Employees</h1>
-{{!-- <a href="/timetable">Timetable</a> --}}
+{{!--<a href="/timetable">Timetable</a> --}} 
 {{message}}
 <form method="post" action="/employees">
   <label for="name">Employee Name</label>
@@ -11,13 +11,14 @@
   <button type="submit">Add Employee</button>
 </form>
 
-    
+
 <ul>
-{{#each employees}}
-<li id={{id}}>
- {{name}} {{phone_number}} {{email}} <button class="deleteEmployee">Delete</button>
-</li>
-{{/each}}
+  {{#each employees}}
+  <li id={{id}}>
+    {{name}} {{phone_number}} {{email}}
+    <button class="deleteEmployee">Delete</button>
+  </li>
+  {{/each}}
 </ul>
 <button class="addShift">Add Shift</button>
 
@@ -33,10 +34,20 @@
   <button type="submit">Add</button>
 </form>
 
+<form action="/shifts" method="get">
+View Schedule Date:<input type="text" id="datepicker">
+<button class="getShifts">Add</button>
+</form>
+
 
 <div class="timetable"></div>
 
 <script>
+//let date = $(function () {
+//    $("#datepicker").datepicker();
+//  });
+let date = "03/01/2018";
+
   $('.deleteEmployee').on('click', (event) => {
     console.log(event.target.parentNode.id);
     $.ajax({
@@ -58,14 +69,24 @@
 
     let employeeNames = employees.map(employees => employees.name);
 
-    var timetable = new Timetable();
-    timetable.setScope(0,23);
-    timetable.addLocations(employeeNames);
 
-    timetable.addEvent('Server', employeeNames[0], new Date(2015,7,17,9,00), new Date(2015,7,17,11,30), { url: '#' });
-     
-    var renderer = new Timetable.Renderer(timetable);
-    renderer.draw('.timetable');
+    let timetable = new Timetable();
+    timetable.setScope(8, 7);
+    timetable.addLocations(employeeNames);
+    $.ajax({
+      method: 'GET',
+      url: '/shifts/' + date,
+    }).then((shifts) => {
+      console.log(shifts)
+
+      var timetable = new Timetable();
+      timetable.setScope(8,7);
+      timetable.addLocations(employeeNames);
+
+      timetable.addEvent('Server', employeeNames[0], new Date(2015, 7, 17, 9, 00), new Date(2015, 7, 17, 11, 30), { url: '#' });
+
+      var renderer = new Timetable.Renderer(timetable);
+      renderer.draw('.timetable');
+    });
   });
 </script>
-
