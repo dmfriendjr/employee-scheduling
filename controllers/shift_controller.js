@@ -26,11 +26,10 @@ router.get('/shifts/:month/:day/:year', isLoggedIn, function(req, res) {
 }); 
 
 router.post('/shifts', isLoggedIn, (req, res) =>{
-  console.log(req.body);
   db.employees.findOne({where: {id: req.body.employee}}).then(employee => {
     db.shifts.create({
-      start_date: req.body.start_date,
-      end_date: req.body.end_date,
+      start_date: new Date(req.body.start_date).toUTCString(), 
+      end_date: new Date(req.body.end_date).toUTCString(),
       shift_title: req.body.shift_title
     }).then(shift => {
       if (employee) {
@@ -49,6 +48,7 @@ router.put('/shifts', isLoggedIn, (req, res) => {
     }
   });
 });
+
 
 function isLoggedIn(req, res, next) {
 
