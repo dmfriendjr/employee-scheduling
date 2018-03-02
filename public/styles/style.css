@@ -4,6 +4,11 @@
   font-size: 14px;
 }
 
+input {	
+  outline: none;
+  border: 1px solid #999999;	
+}
+
 a:focus {
 	outline: none !important;
 }
@@ -29,7 +34,7 @@ textarea {
   border: none;
 }
 
-textarea:focus, input:focus {
+.login-input:focus {
   border-color: transparent !important;
 }
 
@@ -299,4 +304,17 @@ nav li {
 
 .navbar {
   border-bottom: 1px #333333 solid;
+}
+
+.schedule-input {
+  font-family: "Poppins";
+  font-size: 15px;
+  text-align: center;
+  line-height: 1.5;
+  display: block;
+  width: 25%;
+  border-radius: 25px;
+  padding-left: 50px;
+  outline: none;
+	border: 1px solid #999999;
 }
