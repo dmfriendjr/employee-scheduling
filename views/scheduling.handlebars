@@ -19,10 +19,18 @@ View Schedule Date:<input type="text" id="datepicker">
 
 <script>
  
-  let timetable = new Timetable();
-  
-  var renderer = new Timetable.Renderer(timetable);
-  timetable.setScope(8, 7);
+let timetable = new Timetable();
+
+var renderer = new Timetable.Renderer(timetable);
+timetable.setScope(8, 7);
+$.ajax({
+  method: 'GET',
+  url: '/employees'
+}).then(employees => {
+  let employeeNames = employees.map(employee => employee.name);
+  timetable.addLocations(employeeNames);
+})
+
 $("#datepicker").datepicker({
   onSelect: function(dateText) {
   $.ajax({
@@ -30,12 +38,10 @@ $("#datepicker").datepicker({
       url: '/employees',
     }).then((employees) => {
 
-      let employeeNames = employees.map(employee => employee.name);
       let employeeData = employees.map(employee => ({
         name: employee.name,
         id: employee.id
       }));
-      timetable.addLocations(employeeNames);
 
       $.ajax({
         method: 'GET',
