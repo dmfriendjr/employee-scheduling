@@ -56,7 +56,7 @@
         <button class="btn btn-success" type="submit">Add Employee</button>
       </form>
     </div>
-    <div class="col-md-6 col-12">
+    <div class="col-md-6 col-12" id="employeeTable">
       <table class="table">
         <thead>
           <tr >
@@ -69,12 +69,12 @@
         </thead>
         <tbody>
           {{#each employees}}
-          <tr value={{id}}>
+          <tr id={{id}}>
             <th scope="row">{{id}}</th>
             <td>{{name}}</td>
             <td>{{phone_number}}</td>
             <td>{{email}}</td>
-            <td><button class="deleteEmployee">Delete</button></td>
+            <td><button class="btn btn-danger deleteEmployee">Delete</button></td>
           </tr>
           {{/each}}
         </tbody>
