@@ -74,7 +74,7 @@ $("#datepicker").datepicker({
         name: employee.name,
         id: employee.id
       }));
-
+        timetable.events = []
       $.ajax({
         method: 'GET',
         url: '/shifts/' + dateText,
@@ -92,25 +92,15 @@ $("#datepicker").datepicker({
             new Date(end.year(), end.month(), end.day(), end.hour(), end.minute()), { url: '#' });
           })
         });
+
         renderer.draw('.timetable');
+        
       });
     });
     }
 });;
 
-  $('.deleteEmployee').on('click', (event) => {
-    console.log(event.target.parentNode.id);
-    $.ajax({
-      method: 'DELETE',
-      url: '/employees',
-      contentType: 'application/json',
-      data: JSON.stringify({
-        id: event.target.parentNode.id
-      }),
-    }).then(() => {
-      location.reload();
-    });
-  });
+
 
  
 </script>
