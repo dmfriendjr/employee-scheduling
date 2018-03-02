@@ -7,14 +7,14 @@ module.exports = function(app, passport) {
     if (req.user) {
       res.redirect('/manageEmployees');
     } else {
-      res.render('home', { message: req.flash('loginMessage')});
+      res.render('home', { message: req.flash('loginMessage') + req.flash('signupMessage')});
     }
   });
 
   app.post('/login', passport.authenticate('local-login', {
-    successRedirect : '/manageEmployees', // redirect to the secure profile section
-    failureRedirect : '/', // redirect back to the signup page if there is an error
-    failureFlash : true // allow flash messages
+    successRedirect : '/manageEmployees', 
+    failureRedirect : '/', 
+    failureFlash : true 
   }),
   function(req, res) {
     if (req.body.remember) {
@@ -26,7 +26,6 @@ module.exports = function(app, passport) {
   });
 
   app.get('/signup', function(req, res) {
-    // render the page and pass in any flash data if it exists
     res.render('home', { message: req.flash('signupMessage'),
       username: req.flash('username'),
       companyName: req.flash('companyName'),
@@ -36,9 +35,9 @@ module.exports = function(app, passport) {
 
   // process the signup form
   app.post('/signup', passport.authenticate('local-signup', {
-    successRedirect : '/manageEmployees', // redirect to the secure profile section
-    failureRedirect : '/', // redirect back to the signup page if there is an error
-    failureFlash : true // allow flash messages
+    successRedirect : '/', 
+    failureRedirect : '/', 
+    failureFlash : true 
   }));
 
   app.get('/logout', function(req, res) {
