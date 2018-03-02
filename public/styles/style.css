@@ -105,17 +105,11 @@ button:hover {
   display: -ms-flexbox;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  align-content: center;
-  padding: 70px 10px;;
-  width: 65%;
-  margin-top: 30px;
-}
-
-.login-pic {
-  display: flex;
   justify-content: center;
   align-content: center;
+  padding: 70px 10px;;
+  width: 30%;
+  margin-top: 30px;
 }
 
 .login-form-title {
@@ -182,7 +176,6 @@ button:hover {
 
 .symbol-login-input {
   font-size: 15px;
-
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -198,7 +191,6 @@ button:hover {
   padding-left: 35px;
   pointer-events: none;
   color: #666666;
-
   -webkit-transition: all 0.4s;
   -o-transition: all 0.4s;
   -moz-transition: all 0.4s;
@@ -209,7 +201,6 @@ button:hover {
   color: #57b846;
   padding-left: 28px;
 }
-
 
 .container-login-form-btn {
   width: 100%;
@@ -241,7 +232,6 @@ button:hover {
   align-items: center;
   padding: 0 25px;
   margin-bottom: 5px;
-
   -webkit-transition: all 0.4s;
   -o-transition: all 0.4s;
   -moz-transition: all 0.4s;
