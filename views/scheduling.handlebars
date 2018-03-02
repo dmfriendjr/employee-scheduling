@@ -106,11 +106,10 @@
 
 <script>
 
-  if (window.location.href.indexOf('/editShift') !== -1) {
-    $('#myModal').modal();
-  }
+if (window.location.href.indexOf('/editShift') !== -1) {
+  $('#myModal').modal();
+}
 
- 
 let timetable = new Timetable();
 
 var renderer = new Timetable.Renderer(timetable);
@@ -123,8 +122,9 @@ $.ajax({
   timetable.addLocations(employeeNames);
 })
 
-$("#datepicker").datepicker({
-  onSelect: function(dateText) {
+
+$('#datepicker').on('change', (event) => {
+  let dateText = moment(event.target.value).format('MM/DD/YYYY');
   $.ajax({
       method: 'GET',
       url: '/employees',
@@ -145,9 +145,6 @@ $("#datepicker").datepicker({
           empShifts.forEach(shift => {
             let start = moment(shift.start_date);
             let end = moment(shift.end_date);
-            console.log('Shift is:', shift);
-            console.log('employee is:', employee);
-            console.log(timetable);
             timetable.addEvent(shift.shift_title, employee.name, new Date(start.year(), start.month(), start.day(), start.hour(), start.minute()),
             new Date(end.year(), end.month(), end.day(), end.hour(), end.minute()),
             { url: `/editShift/${shift.id}` });
@@ -159,9 +156,7 @@ $("#datepicker").datepicker({
       });
     });
     }
-});;
+)
 
-
-
- 
+$('#datepicker').val(moment().format('YYYY-MM-DD')).change();
 </script>
