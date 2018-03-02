@@ -297,3 +297,7 @@ button:hover {
 nav li {
   list-style: none;
 }
+
+.nav-name-dropdown {
+  text-decoration: underline;
+}
