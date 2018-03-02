@@ -55,9 +55,9 @@ router.post('/employees', isLoggedIn, function(req, res) {
     req.flash('employeeEmail', req.body.email);
 
     if(err.errors[0].path === 'phone_number') {
-      req.flash('entryError', 'Phone number is an invalid format. Please use 555-555-5555');
+      req.flash('entryError', '<p class="error-message">Phone number is an invalid format. Please use 555-555-5555</p>');
     } else if (err.errors[0].path === 'email') {
-      req.flash('entryError', 'Email is an invalid format. Please enter valid email.');
+      req.flash('entryError', '<p class="error-message">Email is an invalid format. Please enter valid email.</p>');
     }
 
     res.redirect('/manageEmployees');
