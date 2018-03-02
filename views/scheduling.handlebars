@@ -1,3 +1,9 @@
+ {{!-- 
+ ////////////////////
+ //////Nav Bar///////
+ //////////////////// 
+ --}}
+
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <h3 class="navbar-header">{{user.company}}</h3>
@@ -29,25 +35,48 @@
     </div>
 </nav>
 
-
-<form action="/shifts" method="post">
-  <select name="employee">
-    {{#each employees}}
-    <option value={{id}}>{{name}}</option>
-    {{/each}}
-  </select>
-  <input type="text" name="shift_title" />
-  <input type="datetime-local" name="start_date" />
-  <input type="datetime-local" name="end_date" />
-  <button type="submit">Add</button>
-</form>
+ {{!-- 
+ ////////////////////
+ ////Date Select/////
+ //////////////////// 
+ --}}
 
 <form action="/shifts" method="get">
-View Schedule Date:<input type="text" id="datepicker">
+
+  <h1 class="text-center">Schedule</h1>
+
+  <div class="d-flex justify-content-center">
+    <input class="schedule-input" type="date" id="datepicker">
+  </div>
+
 </form>
 
+<div class="col-md-6 col-s-12">
+  <form action="/shifts" method="post">
+    <h2>Pick Employee:</h2>
+      <select name="employee">
+        {{#each employees}}
+        <option value={{id}}>{{name}}</option>
+        {{/each}}
+      </select>
 
-<div class="timetable"></div>
+    <h2>Role:</h2>
+      <input type="text" name="shift_title" />
+
+    <h2>Shift Start:</h2>
+      <input type="datetime-local" name="start_date" />
+
+    <h2>Shift End</h2>
+      <input type="datetime-local" name="end_date" />
+
+    <button type="submit">Add Shift</button>
+
+  </form>
+
+</div>
+
+<div class="timetable col-md-6"></div>
+
 
 <script>
  
