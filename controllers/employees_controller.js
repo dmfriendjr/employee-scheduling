@@ -27,10 +27,10 @@ router.get('/scheduling', isLoggedIn, function(req, res) {
       {
         user: req.user,
         employees: parsedEmployees, 
-        message: req.flash('entryError'),
+        message: req.flash('entryError') + req.flash('shiftMessage'),
         employeeName: req.flash('employeeName'),
         employeePhone: req.flash('employeePhone'),
-        employeeEmail: req.flash('employeeEmail')
+        employeeEmail: req.flash('employeeEmail'),
       });
   }); 
 });

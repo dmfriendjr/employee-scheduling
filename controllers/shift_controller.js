@@ -59,6 +59,13 @@ router.post('/shifts', isLoggedIn, (req, res) =>{
   db.employees.findOne({where: {id: req.body.employee}}).then(employee => {
     let startDate = moment.tz(req.body.start_date, 'America/New_York');
     let endDate = moment.tz(req.body.end_date, 'America/New_York'); 
+
+    if (startDate.isAfter(endDate)) {
+      req.flash('shiftMessage', 'Start date and time must be before end date and time.');
+      res.redirect('/scheduling');
+      return;
+    }
+
     db.shifts.create({
       start_date: startDate.tz('UTC').format(), 
       end_date: endDate.tz('UTC').format(),
