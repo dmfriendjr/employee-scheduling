@@ -88,20 +88,22 @@
           </div>
 
           <div class="login-input-wrap">
-            <input class="login-input" type="password" name="password" placeholder="Password">
-            <span class="focus-login-input"></span>
-            <span class="symbol-login-input">
+            <input class="login-input" type="password" name="password" id="password" placeholder="Password">
+            <span class="focus-login-input" id="passID1Flair"></span>
+            <span class="symbol-login-input" id="passID1">
               <i class="fas fa-lock"></i>
             </span>
           </div>
 
           <div class="login-input-wrap">
-            <input class="login-input" type="passwordConfirm" name="passwordConfirm" placeholder="Confirm Password">
-            <span class="focus-login-input"></span>
-            <span class="symbol-login-input">
+            <input class="login-input" type="password" name="passwordConfirm" id="passwordConfirm" placeholder="Confirm Password" onChange="checkPasswordMatch();">
+            <span class="focus-login-input" id="passID2Flair"></span>
+            <span class="symbol-login-input" id="passID2">
               <i class="fas fa-lock"></i>
             </span>
           </div>
+
+          <p id="passMessage"></p>
 
           <div class="login-input-wrap">
             <input class="login-input" type="text" name="companyName" placeholder="Company Name" value={{companyName}}>
@@ -120,7 +122,7 @@
           </div>
 
           <div class="container-login-form-btn">
-            <button class="login-btn" type="submit">
+            <button id="create-btn" class="login-btn" type="submit">
               Sign up
             </button>
           </div>
