@@ -293,3 +293,7 @@ button:hover {
   margin-left:10px;
   margin-bottom:10px;
 }
+
+nav li {
+  list-style: none;
+}
