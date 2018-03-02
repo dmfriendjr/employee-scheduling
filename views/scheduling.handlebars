@@ -1,0 +1,78 @@
+<form action="/shifts" method="post">
+  <select name="employee">
+    {{#each employees}}
+    <option value={{id}}>{{name}}</option>
+    {{/each}}
+  </select>
+  <input type="text" name="shift_title" />
+  <input type="datetime-local" name="start_date" />
+  <input type="datetime-local" name="end_date" />
+  <button type="submit">Add</button>
+</form>
+
+<form action="/shifts" method="get">
+View Schedule Date:<input type="text" id="datepicker">
+</form>
+
+
+<div class="timetable"></div>
+
+<script>
+ 
+  let timetable = new Timetable();
+  
+  var renderer = new Timetable.Renderer(timetable);
+  timetable.setScope(8, 7);
+$("#datepicker").datepicker({
+  onSelect: function(dateText) {
+  $.ajax({
+      method: 'GET',
+      url: '/employees',
+    }).then((employees) => {
+
+      let employeeNames = employees.map(employee => employee.name);
+      let employeeData = employees.map(employee => ({
+        name: employee.name,
+        id: employee.id
+      }));
+      timetable.addLocations(employeeNames);
+
+      $.ajax({
+        method: 'GET',
+        url: '/shifts/' + dateText,
+      }).then((shifts) => {
+
+        employeeData.forEach(employee => {
+          let empShifts = shifts.filter(shift => shift.employeeId === employee.id);
+          empShifts.forEach(shift => {
+            let start = moment(shift.start_date);
+            let end = moment(shift.end_date);
+            console.log('Shift is:', shift);
+            console.log('employee is:', employee);
+            console.log(timetable);
+            timetable.addEvent(shift.shift_title, employee.name, new Date(start.year(), start.month(), start.day(), start.hour(), start.minute()),
+            new Date(end.year(), end.month(), end.day(), end.hour(), end.minute()), { url: '#' });
+          })
+        });
+        renderer.draw('.timetable');
+      });
+    });
+    }
+});;
+
+  $('.deleteEmployee').on('click', (event) => {
+    console.log(event.target.parentNode.id);
+    $.ajax({
+      method: 'DELETE',
+      url: '/employees',
+      contentType: 'application/json',
+      data: JSON.stringify({
+        id: event.target.parentNode.id
+      }),
+    }).then(() => {
+      location.reload();
+    });
+  });
+
+ 
+</script>

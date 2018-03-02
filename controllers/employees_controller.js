@@ -20,6 +20,21 @@ router.get('/manageEmployees', isLoggedIn, function(req, res) {
   });
 });
 
+router.get('/scheduling', isLoggedIn, function(req, res) {
+  db.employees.findAll({where: {userId: req.user.id}}).then(employees => {
+    let parsedEmployees = employees.map(employee => employee.dataValues);
+    res.render('scheduling', 
+      {
+        user: req.user,
+        employees: parsedEmployees, 
+        message: req.flash('entryError'),
+        employeeName: req.flash('employeeName'),
+        employeePhone: req.flash('employeePhone'),
+        employeeEmail: req.flash('employeeEmail')
+      });
+  }); 
+});
+
 router.get('/employees', isLoggedIn, function(req, res) {
   db.employees.findAll({where: {userId: req.user.id}}).then(employees => {
     res.send(employees);
