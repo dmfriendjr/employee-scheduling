@@ -48,7 +48,7 @@ router.post('/shifts', isLoggedIn, (req, res) =>{
     }).then(shift => {
       if (employee) {
         employee.addShift(shift);
-        res.redirect('/manageEmployees');
+        res.redirect('/scheduling');
       }
     });
   });
