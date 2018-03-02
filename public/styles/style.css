@@ -4,11 +4,6 @@
   font-size: 14px;
 }
 
-input {
-  outline: none;
-	border: 1px solid #999999;
-}
-
 a:focus {
 	outline: none !important;
 }
@@ -143,6 +138,8 @@ button:hover {
   width: 100%;
   padding: 0 60px;
   border-radius: 25px;
+  outline: none;
+	border: 1px solid #999999;
 }
 
 .focus-login-input {
@@ -156,7 +153,7 @@ button:hover {
   height: 100%;
   box-shadow: 0px 0px 0px 0px;
   color: rgba(87,184,70, 0.8);
-  
+  outline: none;
 }
 
 .login-input:focus + .focus-login-input {
@@ -284,13 +281,11 @@ button:hover {
 
 .error-message {
   color: red;
-  margin-left:10px;
   margin-bottom:10px;
 }
 
 .success-message {
   color: #57b846;
-  margin-left:10px;
   margin-bottom:10px;
 }
 
@@ -300,4 +295,8 @@ nav li {
 
 .nav-name-dropdown {
   text-decoration: underline;
+}
+
+.navbar {
+  border-bottom: 1px #333333 solid;
 }

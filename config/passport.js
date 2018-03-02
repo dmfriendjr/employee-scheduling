@@ -42,15 +42,15 @@ module.exports = function(passport) {
           req.flash('username', req.body.username);
           req.flash('companyName', req.body.companyName);
           req.flash('email', req.body.email);
-          return done(null, false, req.flash('signupMessage', 'Username is unavailable.'));
+          return done(null, false, req.flash('signupMessage','<p class="error-message text-center">Username is unavailable.</p>'));
         } else {
           if (!password.match(passwordRegex)) {
             req.flash('username', req.body.username);
             req.flash('companyName', req.body.companyName);
             req.flash('email', req.body.email);
             return done(null, false, req.flash('signupMessage',
-              `Password must be at least 8 characters long and contain 
-              uppercase letter, lowercase letter, a number, and one special character.`));
+              `<p class="error-message text-center">Password must be at least 8 characters long and contain 
+              uppercase letter, lowercase letter, a number, and one special character.</p>`));
           }
 
           //Username is free to be used
@@ -65,9 +65,7 @@ module.exports = function(passport) {
           db.users.create(newUser).then((data) =>{
             newUser.id = data.dataValues.id;
             mailer.sendVerificationEmail(newUser.email, newUser.username, newUser.verificationToken);
-            return done(null, false, req.flash('signupMessage', 
-              `Signup successful. Please verify your email before logging in. 
-              <a href="http://localhost:8080/verify/${newUser.username}/${newUser.verificationToken}">TESTING ONLY VERIFICATION LINK</a>`));
+            return done(null, false, req.flash('signupMessage', '<p class="success-message text-center">Signup successful. Please verify your email before logging in.</p>'));
           }).catch(err => {
             req.flash('username', req.body.username);
             req.flash('companyName', req.body.companyName);
@@ -75,7 +73,7 @@ module.exports = function(passport) {
 
             if (err.errors[0].path === 'email') {
               return done(null, false, req.flash('signupMessage', 
-                `Please enter a valid email address.`));
+                `<p class="error-message text-center">Please enter a valid email address.</p>`));
             } 
           });
         }
@@ -96,19 +94,19 @@ module.exports = function(passport) {
       db.users.findOne({where: {username: username}}).then(data => {
         if (!data) {
           //No user was found
-          return done(null, false, req.flash('loginMessage', 'Username or password was invalid.'));
+          return done(null, false, req.flash('loginMessage', '<p class="error-message text-center">Username or password was invalid.</p>'));
         }
 
         if (!bcrypt.compareSync(password, data.dataValues.password)) {
           //Password was incorrect
-          return done(null, false, req.flash('loginMessage', 'Username or password was invalid.'));
+          return done(null, false, req.flash('loginMessage', '<p class="error-message text-center">Username or password was invalid.</p>'));
         }
 
         if(!data.dataValues.verified) {
           //User not has verified their email
           return done(null, false, req.flash('loginMessage', 
-            `Please verify your email before logging in.
-            <a href="/resendVerification/${data.dataValues.username}">Resend Verification Email</a>`));
+            `<p class="error-message text-center">Please verify your email before logging in.
+            <a href="/resendVerification/${data.dataValues.username}">Resend Verification Email</a></p>`));
         }
 
         return done(null, data.dataValues);

@@ -10,10 +10,10 @@ router.get('/verify/:username/:token', (req, res) => {
   db.users.findOne({where: {username: req.params.username, verificationToken: req.params.token}}).then( data => {
     if (data) {
       data.updateAttributes({verified: true});
-      req.flash('loginMessage', 'Email verified. Please login.');
+      req.flash('loginMessage', '<p class="success-message text-center">Email verified. Please login.</p>');
       res.redirect('/');
     } else {
-      req.flash('loginMessage', 'Invalid verification token. Please contact support.');
+      req.flash('loginMessage', '<p class="error-message text-center">Invalid verification token. Please contact support.</p>');
       res.redirect('/');
     }
   });
@@ -51,7 +51,7 @@ router.get('/resendVerification/:username', (req, res) => {
     mailer.sendVerificationEmail(user.dataValues.email, 
       user.dataValues.username, verificationToken);
     user.updateAttributes({verificationToken: verificationToken});
-    req.flash('loginMessage', 'Verification email sent to email on file for account.');
+    req.flash('loginMessage', '<p class="success-message text center">Verification email sent to email on file for account.</p>');
     res.redirect('/');
   });
 });
@@ -61,7 +61,7 @@ router.get('/reset/:username/:token', (req, res) => {
     if (data) {
       res.render('resetForm');
     } else {
-      req.flash('loginMessage', 'Invalid password reset token. Please contact support.');
+      req.flash('loginMessage', '<p class="error-message">Invalid password reset token. Please contact support.</p>');
       res.redirect('/');
     }
   });
@@ -74,10 +74,10 @@ router.post('/reset/:username/:token', (req, res) => {
         password: bcrypt.hashSync(req.body.password, null, null),
         verificationToken: randomstring.generate(16)
       });
-      req.flash('loginMessage', 'Password reset succesful. Please login with new password.');
+      req.flash('loginMessage', '<p class="success-message text-center">Password reset succesful. Please login with new password.</p>');
       res.redirect('/');
     } else {
-      req.flash('loginMessage', 'Invalid password reset token. Please contact support.');
+      req.flash('loginMessage', '<p class="error-message text-center">Invalid password reset token. Please contact support.</p>');
       res.redirect('/');
     }
   });
