@@ -353,3 +353,56 @@ nav li {
   color: red;
   margin-left: 10px;
 }
+
+#account-background {
+  background-color: #FFFFFF;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  right: 0;
+  z-index: -1;
+}
+
+.account-page-font {
+  color: #FFFFFF
+}
+
+#navigation {
+ background-color: #1A597A;
+ border-bottom: solid 1px #AAA195;
+}
+
+#new-employee {
+  background-color: #F1EDE6;
+  border-right: solid 1px #AAA195;
+  min-height: 100vh;
+}
+
+#new-employee-form input {
+  outline: none;
+  border: none;
+  background-color: #F1EDE6;
+}
+
+.employee-form-control:focus {
+  outline: none;
+  border: none;
+  background-color: #F1EDE6;
+}
+
+.invisible-button {
+  background-color: transparent;
+  border-color: #ccc;
+}
+
+/* #new-employee-form .form-group {
+  outline: none;
+  border: none;
+  background-color: #F1EDE6;
+}
+
+.new-employee-form-input:focus {
+  outline: none; 
+  border: none;
+  border-bottom: solid 1px #AAA195;
+} */

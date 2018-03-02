@@ -4,11 +4,12 @@
 //////////////////// 
 --}}
 
+<div id="account-background"></div>
 
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <h3 class="navbar-header">{{user.company}}</h3>
-    <div class="navbar-right dropdown">
+<nav id="navigation" class="navbar navbar-default">
+  <div class="container">
+    <h3 class="navbar-header account-page-font">EmployEase</h3>
+    <div class="navbar-right dropdown account-page-font">
       Signed in as <span class="dropdown-toggle nav-name-dropdown" data-toggle="dropdown">{{user.username}}</span>
       <span class="caret"></span>
       </a>
@@ -33,17 +34,21 @@
         </li>
       </ul>
   </div>
+  </div>
 </nav>
 
-<div class="container">
-  <h1 class="text-center mb-5">Company Overview</h1>
+
+<div class="container-fluid">
+
   {{{message}}}
+
   <div class="row">
-    <div class="col-md-6 col-12">
-      <form method="post" class="form-group" action="/employees">
+    <div id="new-employee" class="col-md-3 pt-2">
+      <h4 class="text-right">New Employee</h4>
+      
+      <form id="new-employee-form" method="post" class="form-group" action="/employees">
         <div class="form-group">
-          <label class="col-4" for="name">Employee Name</label>
-          <input class="col-8 form-control" 
+          <input class="form-control employee-form-control text-right border-bottom col-8 offset-4" 
             type="text"
             placeholder="John Doe"
             name="name" 
@@ -51,19 +56,22 @@
         </div>
 
         <div class="form-group">
-          <label class="col-4" for="phone_number">Phone Number</label>
-          <input class="col-8 form-control" type="text" placeholder="555-555-5555" name="phone_number" value={{employeePhone}}>
+          <input class="form-control employee-form-control text-right border-bottom col-8 offset-4" type="text" placeholder="555-555-5555" name="phone_number" value={{employeePhone}}>
         </div>
 
         <div class="form-group">
-          <label class="col-4" for="email">Email</label>
-          <input class="col-8 form-control" type="email" placeholder="email@email.com" name="email" value={{employeeEmail}}>
+          <input class="form-control employee-form-control text-right border-bottom col-8 offset-4" type="email" placeholder="john@doe.com" name="email" value={{employeeEmail}}>
         </div>
 
-        <button class="btn btn-success" type="submit">Add Employee</button>
+        <button class="invisible-button float-right" type="submit"><i class="fas fa-plus"></i> Add Employee</button>
       </form>
+
+
+
+       {{!-- {{user.company}} --}}
     </div>
     <div class="col-md-6 col-12">
+        <h1 class="text-center mb-5 text-capitalize">Howdy, {{user.username}}</h1>
       <table class="table">
         <thead>
           <tr>
