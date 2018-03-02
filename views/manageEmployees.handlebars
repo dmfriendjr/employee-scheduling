@@ -1,11 +1,25 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <h3 class="navbar-header">{{user.company}}</h3>
-    <li class="navbar-right dropdown">
-      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Signed in as {{user.username}}</a>
+    <div class="navbar-right dropdown">
+      Signed in as <span class="dropdown-toggle nav-name-dropdown" data-toggle="dropdown">{{user.username}}</span>
+      {{!-- <a class="dropdown-toggle" data-toggle="dropdown" href="#">Signed in as {{user.username}}</a> --}}
       <span class="caret"></span>
       </a>
       <ul class="dropdown-menu">
+
+        <li>
+          <a href="/ManageEmployees">
+            <i class="fas fa-users"></i>Manage Employees
+          </a>
+        </li>
+
+        <li>
+          <a href="/scheduling">
+            <i class="far fa-address-card"></i>Set Schedules
+          </a>
+        </li>
+
         <li>
           <a href="/logout">
             <i class="fas fa-sign-out-alt"></i>Logout
@@ -18,7 +32,7 @@
 
 <h1>Employees</h1>
 {{!--<a href="/timetable">Timetable</a> --}} 
-{{message}}
+{{{message}}}
 <form method="post" action="/employees">
   <label for="name">Employee Name</label>
   <input type="text" name="name" value={{employeeName}}>
