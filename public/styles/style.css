@@ -247,8 +247,8 @@ button:hover {
   position: fixed;
   bottom: 0;
 	margin-bottom: 0px;
-	padding-top: 5px;
-	padding-bottom: 5px;
+	padding-top: 20px;
+	padding-bottom: 20px;
 	color: white;
   background: rgba(0, 0, 0, 0.90);
   z-index: 5;
