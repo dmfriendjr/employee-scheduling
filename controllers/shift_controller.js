@@ -76,7 +76,13 @@ router.put('/shifts', isLoggedIn, (req, res) => {
   console.log('put hit');
   db.shifts.findOne({where: {id : req.body.id}}).then(shift => {
     if (shift) {
-      shift.updateAttributes(req.body);
+      let startDate = moment.tz(req.body.start_date, 'America/New_York');
+      let endDate = moment.tz(req.body.end_date, 'America/New_York');
+      shift.updateAttributes({
+        start_date: startDate.tz('UTC').format(),
+        end_date: endDate.tz('UTC').format(),
+        shift_title: req.body.shift_title
+      });
       res.redirect('/scheduling');
     }
   });
