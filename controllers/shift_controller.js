@@ -9,7 +9,6 @@ router.get('/shifts/:month/:day/:year', isLoggedIn, function(req, res) {
     let employeesShiftPromises = employees.map(employee => {
       return employee.getShifts();
     });
-    // let requestedDate = new Date(parseInt(req.params.year), parseInt(req.params.month), parseInt(req.params.day));
     let requestedDate = moment(`${req.params.year}-${req.params.month}-${req.params.day}`, 'YYYY-MM-DD');
     Promise.all(employeesShiftPromises).then(shifts => {
       let shiftData = [];
@@ -39,7 +38,6 @@ router.get('/shifts/:month/:day/:year', isLoggedIn, function(req, res) {
 router.post('/shifts', isLoggedIn, (req, res) =>{
   db.employees.findOne({where: {id: req.body.employee}}).then(employee => {
     let startDate = moment.tz(req.body.start_date, 'America/New_York');
-    console.log('Pre-utc time:', startDate.format());
     let endDate = moment.tz(req.body.end_date, 'America/New_York'); 
     db.shifts.create({
       start_date: startDate.tz('UTC').format(), 
