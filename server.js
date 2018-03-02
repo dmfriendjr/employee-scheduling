@@ -2,6 +2,7 @@ require ('dotenv').config();
 const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
+const methodOverride = require('method-override')
 const exphbs = require('express-handlebars');
 const db = require('./models');
 const employeeRoutes = require('./controllers/employees_controller');
@@ -22,6 +23,7 @@ app.set('view engine', 'handlebars');
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(express.static('public'));
+app.use(methodOverride('_method'));
 
 app.use(session({
   secret: 'testingsecret',
