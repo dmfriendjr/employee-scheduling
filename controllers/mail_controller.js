@@ -4,11 +4,12 @@ const moment = require('moment-timezone');
 
 // create reusable transporter object using the default SMTP transport
 const transporter = nodemailer.createTransport({
-  host: 'smtp.ethereal.email',
+  host: 'smtp.gmail.com',
   port: 587,
+  secure: true,
   auth: {
-    user: 'xkl5o2ajf4fqdv26@ethereal.email',
-    pass: '3nVUe6PB5heSz1E6p2'
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
   }
 });
 
