@@ -86,12 +86,12 @@
         </div>
 
         <button class="invisible-button float-right" type="submit">
-          <i class="fas fa-plus"></i> New Shift
+          <i class="fas fa-plus"></i> Add Shift
         </button>
           
       </form>
 
-      <button class="btn btn-success" id="emailSchedule">Email Schedule</button>
+      <button class="btn btn-success" onclick="sentScheduleAlert()" id="emailSchedule">Email Schedule</button>
     </div>
 
     <div class="col-md-7 offset-md-1 col-s-12 order-sm-1">
@@ -222,4 +222,9 @@ $('#emailSchedule').on('click', () => {
 let currentDate = $('#hiddenDate').data('date').length === 0 ? moment().format('YYYY-MM-DD') : $('#hiddenDate').data('date');
 
 $('#datepicker').val(currentDate).change();
+
+ sentScheduleAlert = () => {
+    alert("Schedule Sent");
+}
+
 </script>
