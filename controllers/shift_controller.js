@@ -20,7 +20,8 @@ router.get('/editShift/:shiftId', isLoggedIn, (req, res) => {
           shiftId: shift.id,
           shiftStart: moment.utc(shift.start_date).tz('America/New_York').format('YYYY-MM-DDTHH:mm'),
           shiftEnd: moment.utc(shift.end_date).tz('America/New_York').format('YYYY-MM-DDTHH:mm'),
-          shiftTitle: shift.shift_title
+          shiftTitle: shift.shift_title,
+          currentDate: moment.utc(shift.start_date).tz('America/New_York').format('YYYY-MM-DD')
         });
     });
   }); 
@@ -83,6 +84,7 @@ router.post('/shifts', isLoggedIn, (req, res) =>{
     }).then(shift => {
       if (employee) {
         employee.addShift(shift);
+        req.flash('currentDate', moment.utc(shift.start_date).tz('America/New_York').format('YYYY-MM-DD'));
         res.redirect('/scheduling');
       }
     });

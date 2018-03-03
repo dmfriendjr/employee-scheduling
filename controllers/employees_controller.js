@@ -31,6 +31,7 @@ router.get('/scheduling', isLoggedIn, function(req, res) {
         employeeName: req.flash('employeeName'),
         employeePhone: req.flash('employeePhone'),
         employeeEmail: req.flash('employeeEmail'),
+        currentDate: req.flash('currentDate')
       });
   }); 
 });
@@ -63,6 +64,7 @@ router.post('/employees', isLoggedIn, function(req, res) {
     res.redirect('/manageEmployees');
   });
 });
+
 
 router.delete('/employees', isLoggedIn, function(req, res) {
   db.employees.destroy({where: {id: req.body.id, userId: req.user.id}}).then(() => {
