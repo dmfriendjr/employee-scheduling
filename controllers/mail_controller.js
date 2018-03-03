@@ -4,11 +4,12 @@ const moment = require('moment-timezone');
 
 // create reusable transporter object using the default SMTP transport
 const transporter = nodemailer.createTransport({
-  host: 'smtp.ethereal.email',
-  port: 587,
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true,
   auth: {
-    user: 'xkl5o2ajf4fqdv26@ethereal.email',
-    pass: '3nVUe6PB5heSz1E6p2'
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
   }
 });
 
@@ -18,8 +19,8 @@ module.exports = {
       from: '"Employee Scheduler" <foo@example.com>', 
       to: email, 
       subject: 'Scheduling App - Account Verification', 
-      text: `http://localhost:8080/verify/${username}/${token}`, 
-      html: `<a href="http://localhost:8080/verify/${username}/${token}` 
+      text: `https://employease.herokuapp.com/verify/${username}/${token}`, 
+      html: `<a href="https://employease.herokuapp.com/verify/${username}/${token}` 
     };
   
     transporter.sendMail(mailOptions, (error, info) => {
@@ -35,15 +36,14 @@ module.exports = {
       from: '"Employee Scheduler" <foo@example.com>', 
       to: email, 
       subject: 'Scheduling App - Reset Password', 
-      text: `http://localhost:8080/reset/${username}/${token}`, 
-      html: `<a href="http://localhost:8080/reset/${username}/${token}`  
+      text: `https://employease.herokuapp.com/reset/${username}/${token}`, 
+      html: `<a href="https://employease.herokuapp.com/reset/${username}/${token}`  
     };
 
-    transporter.sendMail(mailOptions, (error, info) => {
+    transporter.sendMail(mailOptions, (error) => {
       if (error) {
         return console.log(error);
       }
-      console.log('Message sent: %s', info.messageId);
     });
   },
 
@@ -66,7 +66,7 @@ module.exports = {
       html: emailText 
     };
 
-    transporter.sendMail(mailOptions, (error, info) => {
+    transporter.sendMail(mailOptions, (error) => {
       if (error) {
         return console.log(error);
       }
