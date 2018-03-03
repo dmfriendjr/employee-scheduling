@@ -61,18 +61,17 @@
         
       <form id="new-shift-form" action="/shifts" class="form-group" method="post">
 
-        <div class="form-group text-right">
-          <label for="employeeFormName">Employee</label>
-          <select class="form-control employee-form-control text-right border-bottom col-10 offset-2" name="employee">
+        <div class="form-group">
+          <select class="form-control employee-select-dropdown border-bottom col-10 offset-2" name="employee">
+            <option class="place-holder-option" value="">Select An Employee</option>
             {{#each employees}}
-              <option value={{id}}>{{name}}</option>
+              <option class="text-right" value={{id}}>{{name}}</option>
             {{/each}}
           </select>
         </div>
 
-        <div class="form-group text-right">
-          <label for="employeeFormPosition">Position</label>
-          <input type="text" name="shift_title" class="form-control employee-form-control text-right border-bottom col-10 offset-2" id="employeeFormPosition" placeholder="Employee Position">
+        <div class="form-group">
+          <input type="text" name="shift_title" class="form-control employee-form-control text-right border-bottom col-10 offset-2" id="employeeFormPosition" placeholder="Role">
           <small id="positionHelp" class="form-text text-muted text-right col-10 offset-2">What will the employee be doing?</small>
         </div>
 
@@ -97,7 +96,7 @@
 
     <div class="col-md-7 offset-md-1 col-sm-12">
       <form class="main-date-form" action="/shifts" method="get">
-        <h1 class="text-center">Schedule</h1>
+        <h1 class="text-center pt-2">Schedule</h1>
         <div class="d-flex justify-content-center">
           <input class="schedule-input" type="date" id="datepicker">
         </div>

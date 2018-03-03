@@ -397,3 +397,30 @@ html, body {
   background-color: transparent;
   border-color: #ccc;
 }
+
+.place-holder-option {
+  color: #6C757C;
+}
+
+.employee-select-dropdown {
+    direction: rtl;
+    outline: none;
+    border: none;
+    background-color: #F1EDE7;
+    box-shadow: none;
+}
+
+.employee-select-dropdown:focus {
+  outline: none;
+  border: none;
+  background-color: #F1EDE7;
+  box-shadow: none;
+}
+
+#positionHelp {
+  display:none;
+}
+
+#employeeFormPosition:focus ~ #positionHelp {
+  display:block;
+}
