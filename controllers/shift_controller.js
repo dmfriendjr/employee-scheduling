@@ -71,8 +71,8 @@ router.post('/shifts', isLoggedIn, (req, res) =>{
     let startDate = moment.tz(req.body.start_date, 'America/New_York');
     let endDate = moment.tz(req.body.end_date, 'America/New_York'); 
 
-    if (startDate.isAfter(endDate)) {
-      req.flash('shiftMessage', 'Start date and time must be before end date and time.');
+    if (!endDate.isAfter(startDate)) {
+      req.flash('shiftMessage', 'Ending date/time must be after start time/date');
       res.redirect('/scheduling');
       return;
     }
