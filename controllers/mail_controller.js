@@ -1,5 +1,6 @@
 'use strict';
 const nodemailer = require('nodemailer');
+const moment = require('moment-timezone');
 
 // create reusable transporter object using the default SMTP transport
 const transporter = nodemailer.createTransport({
@@ -43,6 +44,32 @@ module.exports = {
         return console.log(error);
       }
       console.log('Message sent: %s', info.messageId);
+    });
+  },
+
+  sendScheduleEmails: function(email, shifts) {
+    let emailText = (function(shiftData) {
+      let fullText = '<h1>Your Schedule</h1>';
+
+      shiftData.map(shift => {
+        fullText += `<p>${shift.shiftTitle}: ${moment(shift.shiftStart).format('LLLL')} until ${moment(shift.shiftEnd).format('LLLL')}</p>`;
+      });
+      
+      return fullText;
+    })(shifts);
+
+    let mailOptions = {
+      from: '"Employee Scheduler" <foo@example.com>', 
+      to: email, 
+      subject: 'Your Schedule', 
+      text: emailText, 
+      html: emailText 
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        return console.log(error);
+      }
     });
   }
 };
