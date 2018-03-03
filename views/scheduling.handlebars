@@ -1,19 +1,17 @@
+<div id="account-background"></div>
+
 {{!-- 
-////////////////////
-//////Nav Bar///////
+//////////////////// 
+//////Nav Bar/////// 
 //////////////////// 
 --}}
-
-<div id="account-background"></div>
 
 <nav id="navigation" class="navbar navbar-default">
   <div class="container">
     <h3 class="navbar-header account-page-font">EmployEase</h3>
     <div class="navbar-right dropdown account-page-font">
-      Signed in as
-      <span class="dropdown-toggle nav-name-dropdown" data-toggle="dropdown">{{user.username}}</span>
-      <span class="caret"></span>
-      </a>
+      Signed in as <span class="dropdown-toggle nav-name-dropdown" data-toggle="dropdown">{{user.username}}</span> <span class="caret"></span>
+      
       <ul class="dropdown-menu">
 
         <li>
@@ -33,124 +31,117 @@
             <i class="fas fa-sign-out-alt"></i> Logout
           </a>
         </li>
+
       </ul>
+
     </div>
   </div>
 </nav>
 
-{{!-- 
-////////////////////
-////Date Select/////
-//////////////////// 
---}}
+<div class="container-fluid">
+  <div class="row">
+    
+  {{!-- 
+  //////////////////// 
+  //Create New Shift// 
+  //////////////////// 
+  --}}
 
-<form class = "main-date-form" action="/shifts" method="get">
+  <div id = "new-shift" class="col-md-3 pt-2">
+    <h4 class="text-right">New Shift</h4>
+    <p class = "text-center bg-warning rounded">{{message}}</p>
+      
+    <form id="new-shift-form" action="/shifts" class="form-group" method="post">
 
-  <h1 class="text-center">Schedule</h1>
+      <div class="form-group text-right">
+        <label for="employeeFormName">Employee</label>
+        <select class="form-control employee-form-control text-right border-bottom col-8 offset-4" name="employee">
+          {{#each employees}}
+            <option value={{id}}>{{name}}</option>
+          {{/each}}
+        </select>
+      </div>
 
-  <div class="d-flex justify-content-center">
-    <input class="schedule-input" type="date" id="datepicker">
+      <div class="form-group text-right">
+        <label for="employeeFormPosition">Position</label>
+        <input type="text" name="shift_title" class="form-control employee-form-control text-right border-bottom col-8 offset-4" id="employeeFormPosition" placeholder="Employee Position">
+        <small id="positionHelp" class="form-text text-muted text-right border-bottom col-8 offset-4">What will the employee be doing?</small>
+      </div>
+
+      <div class="form-group text-right">
+        <label for="employeeFormStart">Shift Starts</label>
+        <input class="form-control employee-form-control text-right col-8 offset-4" type="datetime-local" name="start_date" />
+      </div>
+
+      <div class="form-group text-right">
+        <label for="employeeFormEnd">Shift Ends</label>
+        <input class="form-control employee-form-control text-right col-8 offset-4" type="datetime-local" name="end_date" />
+      </div>
+
+      <button class="invisible-button float-right" type="submit">
+        <i class="fas fa-plus"></i> New Shift
+      </button>
+        
+    </form>
   </div>
 
-</form>
+  
 
-<div class="row">
 
-{{!-- 
-//////////////////// 
-/Employee Schedule// 
-//////////////////// 
---}}
 
-  <div class="col-md-3 offset-md-1 col-s-12">
 
-    <h2 class = "text-center">Create A Shift</h2>
-    <p class = "text-center bg-warning rounded">{{message}}</p>
-    <form action="/shifts" method="post">
+        {{!-- <h2>Schedule A Shift</h2>
 
-      <div class="form-group">
-        <label for="employeeFormName">Employee</label>
-          <select class="form-control" name="employee">
-            {{#each employees}}
-              <option value={{id}}>{{name}}</option>
-            {{/each}}
-          </select>
-      </div>
 
-      <div class="form-group">
-        <label for="employeeFormPosition">Position</label>
-        <input type="text" name="shift_title" class="form-control" id="employeeFormPosition" placeholder="Employee Position">
-        <small id="positionHelp" class="form-text text-muted">What will the employee be doing?</small>
-      </div>
 
-      <div class="form-group">
-        <label for="employeeFormStart">Shift Starts</label>
-        <input type="datetime-local" name="start_date" />
-      </div>
+        <h4>Position</h4>
+          <input type="text" name="shift_title" />
 
-      <div class="form-group">
-        <label for="employeeFormEnd">Shift Ends</label>
-        <input type="datetime-local" name="end_date" />
-      </div>
+        <h2>Shift Start:</h2>
 
-      <button type="submit">Add Shift</button>
+
+        <h2>Shift End</h2>
+          <input type="datetime-local" name="end_date" />
+
+        <button type="submit">Add Shift</button>
+
+      </form> --}}
+
+    <div class="timetable col-md-7 offset-md-1 col-s-12"></div>
+
+      <form class="main-date-form" action="/shifts" method="get">
+      
+        <h1 class="text-center">Schedule</h1>
+      
+        <div class="d-flex justify-content-center">
+          <input class="schedule-input" type="date" id="datepicker">
+        </div>
       
       </form>
 
-
-
-
-
-
-
-
-
-
-
-
-      {{!-- <h2>Schedule A Shift</h2>
-
-
-
-      <h4>Position</h4>
-        <input type="text" name="shift_title" />
-
-      <h2>Shift Start:</h2>
-
-
-      <h2>Shift End</h2>
-        <input type="datetime-local" name="end_date" />
-
-      <button type="submit">Add Shift</button>
-
-    </form> --}}
-
   </div>
 
-  <div class="timetable col-md-7 offset-md-1 col-s-12"></div>
-
-</div>
-
-<div id="myModal" class="modal show">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Edit Shift</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="/shifts?_method=PUT" method="post">
-          <input type="hidden" name="id" value={{shiftId}} />
-          <input type="text" name="shift_title" value={{shiftTitle}} />
-          <input type="datetime-local" name="start_date" value={{shiftStart}} />
-          <input type="datetime-local" name="end_date" value={{shiftEnd}} />
-          <button type="submit" class="btn btn-primary">Save changes</button>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  <div id="myModal" class="modal show">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Shift</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="/shifts?_method=PUT" method="post">
+            <input type="hidden" name="id" value={{shiftId}} />
+            <input type="text" name="shift_title" value={{shiftTitle}} />
+            <input type="datetime-local" name="start_date" value={{shiftStart}} />
+            <input type="datetime-local" name="end_date" value={{shiftEnd}} />
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
   </div>

@@ -288,16 +288,12 @@ html, body {
   margin-bottom:10px;
 }
 
-nav li {
+/* nav li {
   list-style: none;
-}
+} */
 
 .nav-name-dropdown {
   text-decoration: underline;
-}
-
-.navbar {
-  border-bottom: 1px #333333 solid;
 }
 
 .schedule-input {
@@ -372,13 +368,19 @@ nav li {
  border-bottom: solid 1px #AAA195;
 }
 
-#new-employee {
+#new-employee, #new-shift {
   background-color: #F1EDE6;
   border-right: solid 1px #AAA195;
   min-height: 100vh;
 }
 
 #new-employee-form input {
+  outline: none;
+  border: none;
+  background-color: #F1EDE6;
+}
+
+#new-shift-form input {
   outline: none;
   border: none;
   background-color: #F1EDE6;
