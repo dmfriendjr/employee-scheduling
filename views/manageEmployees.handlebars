@@ -34,47 +34,16 @@
             </span>
           </a>
         </li>
-      </ul>
 
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">
+            <i class="fas fa-sign-out-alt"></i>
+          </a>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>
-
-
-{{!-- <nav id="navigation" class="navbar navbar-default">
-  <div class="container">
-    <h3 class="navbar-header account-page-font">EmployEase</h3>
-    <div class="navbar-right dropdown account-page-font">
-      Signed in as
-      <span class="dropdown-toggle nav-name-dropdown" data-toggle="dropdown">{{user.username}}</span>
-      <span class="caret"></span>
-      </a>
-      <ul class="dropdown-menu">
-
-        <li>
-          <a href="/ManageEmployees" class="dropdown-link">
-            <i class="fas fa-users"></i> Employees
-          </a>
-        </li>
-
-        <li>
-          <a href="/scheduling" class="dropdown-link">
-            <i class="far fa-address-card"></i> Schedule
-          </a>
-        </li>
-
-        <li>
-          <a href="/logout" class="dropdown-link">
-            <i class="fas fa-sign-out-alt"></i> Logout
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav> --}}
-
-
-
 
 <div class="container-fluid">
 
@@ -127,7 +96,7 @@
               <td>{{name}}</td>
               <td>{{phone_number}}</td>
               <td>{{email}}</td>
-              <td class="text-center" id={{id}}><button class="invisible-button"><i class="far fa-times-circle"></i></button></td>
+              <td class="text-center" id={{id}}><button class="invisible-button text-danger"><i class="far fa-times-circle"></i></button></td>
             </tr>
           {{/each}}
         </tbody>
