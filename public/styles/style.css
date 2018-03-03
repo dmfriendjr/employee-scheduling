@@ -390,6 +390,7 @@ html, body {
   outline: none;
   border: none;
   background-color: #F1EDE6;
+  box-shadow: none;
 }
 
 .invisible-button {

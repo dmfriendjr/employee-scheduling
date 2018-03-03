@@ -5,16 +5,25 @@ const moment = require('moment-timezone');
 const mailer = require('./mail_controller');
 
 router.get('/editShift/:shiftId', isLoggedIn, (req, res) => {
-  db.shifts.findOne({where: {id: req.params.shiftId}}).then((shift) => {
-    res.render('scheduling', 
-      {
-        showEditShift: true,
-        shiftId: shift.id,
-        shiftStart: moment.utc(shift.start_date).tz('America/New_York').format('YYYY-MM-DDTHH:mm'),
-        shiftEnd: moment.utc(shift.end_date).tz('America/New_York').format('YYYY-MM-DDTHH:mm'),
-        shiftTitle: shift.shift_title
-      });
-  });
+  db.employees.findAll({where: {userId: req.user.id}}).then(employees => {
+    let parsedEmployees = employees.map(employee => employee.dataValues);
+    db.shifts.findOne({where: {id: req.params.shiftId}}).then((shift) => {
+      res.render('scheduling', 
+        {
+          user: req.user,
+          employees: parsedEmployees, 
+          message: req.flash('entryError') + req.flash('shiftMessage'),
+          employeeName: req.flash('employeeName'),
+          employeePhone: req.flash('employeePhone'),
+          employeeEmail: req.flash('employeeEmail'),
+          showEditShift: true,
+          shiftId: shift.id,
+          shiftStart: moment.utc(shift.start_date).tz('America/New_York').format('YYYY-MM-DDTHH:mm'),
+          shiftEnd: moment.utc(shift.end_date).tz('America/New_York').format('YYYY-MM-DDTHH:mm'),
+          shiftTitle: shift.shift_title
+        });
+    });
+  }); 
 });
 
 router.get('/shifts/:month/:day/:year', isLoggedIn, function(req, res) {

@@ -132,6 +132,13 @@ if (window.location.href.indexOf('/editShift') !== -1) {
   $('#myModal').modal();
 }
 
+$('#myModal').on('hidden.bs.modal', function (e) {
+  $.ajax({
+    method: 'GET',
+    url: '/scheduling'
+  })
+});
+
 let timetable = new Timetable();
 let shiftEmailData = {};
 
