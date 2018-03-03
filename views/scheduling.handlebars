@@ -82,15 +82,20 @@
         </div>
 
         <button class="invisible-button float-right" type="submit">
-          <i class="fas fa-plus"></i> New Shift
+          <i class="fas fa-plus"></i> Add Shift
         </button>
           
       </form>
+<<<<<<< HEAD
+=======
+
+      <button class="btn btn-success" >Email Schedule</button>
+>>>>>>> a38d16a7313c2e8ad0c0c782d818a940f37df37c
     </div>
 
     <div class="col-md-7 offset-md-1 col-s-12 order-sm-1">
       <form class="main-date-form" action="/shifts" method="get">
-        <h1 class="text-center pt-2">Schedule <button class="invisible-button"><i class="far fa-envelope"></i></button></h1>
+        <h1 class="text-center pt-2">Schedule <button class="invisible-button" onclick="sentScheduleAlert()" id="emailSchedule"><i class="far fa-envelope"></i></button></h1>
 
         <div class="d-flex justify-content-center">
           <input class="schedule-input" type="date" id="datepicker">
@@ -228,6 +233,7 @@ let currentDate = $('#hiddenDate').data('date').length === 0 ? moment().format('
 
 $('#datepicker').val(currentDate).change();
 
+<<<<<<< HEAD
 
 var dtt = document.getElementById('shiftStarts')
 dtt.onfocus = function (event) {
@@ -239,6 +245,10 @@ var dtt = document.getElementById('shiftEnds')
 dtt.onfocus = function (event) {
   this.type = 'datetime-local';
   this.focus();
+=======
+ sentScheduleAlert = () => {
+    alert("Schedule Sent");
+>>>>>>> a38d16a7313c2e8ad0c0c782d818a940f37df37c
 }
 
 </script>
