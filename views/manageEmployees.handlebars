@@ -111,7 +111,7 @@
       url: '/employees',
       contentType: 'application/json',
       data: JSON.stringify({
-        id: event.target.id
+        id: event.currentTarget.id
       }),
     }).then(() => {
       location.reload();
