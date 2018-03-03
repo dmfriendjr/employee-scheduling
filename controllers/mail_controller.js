@@ -16,7 +16,7 @@ const transporter = nodemailer.createTransport({
 module.exports = {
   sendVerificationEmail: function (email, username, token) {
     let mailOptions = {
-      from: '"Employee Scheduler" <foo@example.com>', 
+      from: '"Employee Scheduler" <employeetimetable@gmail.com>', 
       to: email, 
       subject: 'Scheduling App - Account Verification', 
       text: `https://employease.herokuapp.com/verify/${username}/${token}`, 
@@ -33,7 +33,7 @@ module.exports = {
 
   sendResetPasswordEmail: function(email, username, token) {
     let mailOptions = {
-      from: '"Employee Scheduler" <foo@example.com>', 
+      from: '"Employee Scheduler" <employeetimetable@gmail.com>', 
       to: email, 
       subject: 'Scheduling App - Reset Password', 
       text: `https://employease.herokuapp.com/reset/${username}/${token}`, 
@@ -59,7 +59,7 @@ module.exports = {
     })(shifts);
 
     let mailOptions = {
-      from: '"Employee Scheduler" <foo@example.com>', 
+      from: '"Employee Scheduler" <employeetimetable@gmail.com>', 
       to: email, 
       subject: 'Your Schedule', 
       text: emailText, 

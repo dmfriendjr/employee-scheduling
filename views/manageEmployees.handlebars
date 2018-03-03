@@ -28,12 +28,11 @@
 
         <li class="nav-item">
           <a class="nav-link" href="/scheduling">
-            <i class="fa fa-users text-white"></i> 
-            <span class="text-white">
-              Scheduling
-            </span>
+            <i class="far fa-calendar-alt text-white"></i>
+            <span class="text-white">Scheduling</span>
           </a>
         </li>
+
 
         <li class="nav-item">
           <a class="nav-link" href="/logout">
@@ -50,7 +49,7 @@
   {{{message}}}
 
   <div class="row">
-    <div id="new-employee" class="col-md-3 pt-2">
+    <div id="new-employee" class="col-md-3 pt-2 order-md-first order-sm-12">
       <h4 class="text-right">New Employee</h4>
       
       <form id="new-employee-form" method="post" class="form-group" action="/employees">
@@ -76,7 +75,7 @@
 
 
     </div>
-    <div class="col-md-7 offset-1 col-12">
+    <div class="col-md-7 offset-1 col-12 order-sm-1">
       <h1 class="text-center pt-2 mb-4 text-capitalize">Howdy, {{user.username}}</h1>
       <h4 class="text-center text-capitalize">{{user.company}} Employee Overview</h4>
       <table id="employeeTable" class="table">
