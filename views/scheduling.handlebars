@@ -131,6 +131,8 @@
 
 </div>
 
+<button class="btn btn-success" id="emailSchedule">Email Schedule</button>
+
 <div id="myModal" class="modal show">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -156,6 +158,8 @@
   </div>
 </div>
 
+
+
 <script>
 
 if (window.location.href.indexOf('/editShift') !== -1) {
@@ -163,6 +167,7 @@ if (window.location.href.indexOf('/editShift') !== -1) {
 }
 
 let timetable = new Timetable();
+let shiftEmailData = {};
 
 var renderer = new Timetable.Renderer(timetable);
 timetable.setScope(8, 7);
@@ -184,7 +189,8 @@ $('#datepicker').on('change', (event) => {
 
       let employeeData = employees.map(employee => ({
         name: employee.name,
-        id: employee.id
+        id: employee.id,
+        email: employee.email
       }));
         timetable.events = []
       $.ajax({
@@ -200,6 +206,20 @@ $('#datepicker').on('change', (event) => {
             timetable.addEvent(shift.shift_title, employee.name, new Date(start.year(), start.month(), start.day(), start.hour(), start.minute()),
             new Date(end.year(), end.month(), end.day(), end.hour(), end.minute()),
             { url: `/editShift/${shift.id}` });
+            
+            if (!shiftEmailData[employee.id]) {
+              shiftEmailData[employee.id] = {};
+              shiftEmailData[employee.id].shifts = [];
+            }
+            
+
+            shiftEmailData[employee.id].email = employee.email;
+
+            shiftEmailData[employee.id].shifts.push({
+              shiftTitle: shift.shift_title,
+              shiftStart: shift.start_date,
+              shiftEnd: shift.end_date
+            });
           })
         });
 
@@ -209,6 +229,15 @@ $('#datepicker').on('change', (event) => {
     });
     }
 )
+
+$('#emailSchedule').on('click', () => {
+  $.ajax({
+    method: 'POST',
+    url: 'emailSchedule',
+    data: JSON.stringify(shiftEmailData),
+    contentType: 'application/json'
+  });
+})
 
 $('#datepicker').val(moment().format('YYYY-MM-DD')).change();
 </script>

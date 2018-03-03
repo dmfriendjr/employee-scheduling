@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const db = require('../models');
 const moment = require('moment-timezone');
+const mailer = require('./mail_controller');
 
-router.get('/editShift/:shiftId', (req, res) => {
+router.get('/editShift/:shiftId', isLoggedIn, (req, res) => {
   db.shifts.findOne({where: {id: req.params.shiftId}}).then((shift) => {
     res.render('scheduling', 
       {
@@ -77,6 +78,16 @@ router.post('/shifts', isLoggedIn, (req, res) =>{
       }
     });
   });
+});
+
+router.post('/emailSchedule', isLoggedIn, (req, res) => {
+  for(let key in req.body) {
+    if (req.body.hasOwnProperty(key)) {
+      mailer.sendScheduleEmails(req.body[key].email, req.body[key].shifts);
+    }
+  }
+
+  res.redirect('/scheduling');
 });
 
 router.put('/shifts', isLoggedIn, (req, res) => {
