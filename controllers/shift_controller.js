@@ -20,7 +20,8 @@ router.get('/editShift/:shiftId', isLoggedIn, (req, res) => {
           shiftId: shift.id,
           shiftStart: moment.utc(shift.start_date).tz('America/New_York').format('YYYY-MM-DDTHH:mm'),
           shiftEnd: moment.utc(shift.end_date).tz('America/New_York').format('YYYY-MM-DDTHH:mm'),
-          shiftTitle: shift.shift_title
+          shiftTitle: shift.shift_title,
+          currentDate: moment.utc(shift.start_date).tz('America/New_York').format('YYYY-MM-DD')
         });
     });
   }); 
@@ -70,8 +71,8 @@ router.post('/shifts', isLoggedIn, (req, res) =>{
     let startDate = moment.tz(req.body.start_date, 'America/New_York');
     let endDate = moment.tz(req.body.end_date, 'America/New_York'); 
 
-    if (startDate.isAfter(endDate)) {
-      req.flash('shiftMessage', 'Start date and time must be before end date and time.');
+    if (!endDate.isAfter(startDate)) {
+      req.flash('shiftMessage', 'Ending date/time must be after start time/date');
       res.redirect('/scheduling');
       return;
     }
@@ -83,6 +84,7 @@ router.post('/shifts', isLoggedIn, (req, res) =>{
     }).then(shift => {
       if (employee) {
         employee.addShift(shift);
+        req.flash('currentDate', moment.utc(shift.start_date).tz('America/New_York').format('YYYY-MM-DD'));
         res.redirect('/scheduling');
       }
     });

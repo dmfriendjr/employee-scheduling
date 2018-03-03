@@ -45,6 +45,7 @@
 
 <div class="container-fluid">
   <div class="row">
+    <span id="hiddenDate" data-date={{currentDate}}></span>
       
     {{!-- 
     //////////////////// 
@@ -217,5 +218,7 @@ $('#emailSchedule').on('click', () => {
   });
 })
 
-$('#datepicker').val(moment().format('YYYY-MM-DD')).change();
+let currentDate = $('#hiddenDate').data('date').length === 0 ? moment().format('YYYY-MM-DD') : $('#hiddenDate').data('date');
+
+$('#datepicker').val(currentDate).change();
 </script>
