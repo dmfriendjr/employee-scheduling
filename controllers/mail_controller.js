@@ -18,8 +18,8 @@ module.exports = {
       from: '"Employee Scheduler" <foo@example.com>', 
       to: email, 
       subject: 'Scheduling App - Account Verification', 
-      text: `http://localhost:8080/verify/${username}/${token}`, 
-      html: `<a href="http://localhost:8080/verify/${username}/${token}` 
+      text: `https://employease.herokuapp.com/verify/${username}/${token}`, 
+      html: `<a href="https://employease.herokuapp.com/verify/${username}/${token}` 
     };
   
     transporter.sendMail(mailOptions, (error, info) => {
@@ -35,15 +35,14 @@ module.exports = {
       from: '"Employee Scheduler" <foo@example.com>', 
       to: email, 
       subject: 'Scheduling App - Reset Password', 
-      text: `http://localhost:8080/reset/${username}/${token}`, 
-      html: `<a href="http://localhost:8080/reset/${username}/${token}`  
+      text: `https://employease.herokuapp.com/reset/${username}/${token}`, 
+      html: `<a href="https://employease.herokuapp.com/reset/${username}/${token}`  
     };
 
-    transporter.sendMail(mailOptions, (error, info) => {
+    transporter.sendMail(mailOptions, (error) => {
       if (error) {
         return console.log(error);
       }
-      console.log('Message sent: %s', info.messageId);
     });
   },
 
@@ -66,7 +65,7 @@ module.exports = {
       html: emailText 
     };
 
-    transporter.sendMail(mailOptions, (error, info) => {
+    transporter.sendMail(mailOptions, (error) => {
       if (error) {
         return console.log(error);
       }
