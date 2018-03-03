@@ -87,7 +87,9 @@
           
       </form>
 
-  <button class="btn btn-success" onclick="sentScheduleAlert()" id="emailSchedule">Email Schedule</button>
+      <form action="/scheduling" method="get">
+        <button class="btn btn-success" id="emailSchedule">Email Schedule</button>
+      </form>
     </div>
 
     <div class="col-md-7 offset-md-1 col-s-12 order-sm-1">
@@ -229,9 +231,5 @@ $('#emailSchedule').on('click', () => {
 let currentDate = $('#hiddenDate').data('date').length === 0 ? moment().format('YYYY-MM-DD') : $('#hiddenDate').data('date');
 
 $('#datepicker').val(currentDate).change();
-
- sentScheduleAlert = () => {
-    alert("Schedule Sent");
-}
 
 </script>
