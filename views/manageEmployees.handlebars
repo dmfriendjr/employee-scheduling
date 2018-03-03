@@ -106,13 +106,12 @@
 
 <script>
   $('.deleteEmployee').on('click', (event) => {
-    console.log(event.target.parentNode.id);
     $.ajax({
       method: 'DELETE',
       url: '/employees',
       contentType: 'application/json',
       data: JSON.stringify({
-        id: event.target.parentNode.id
+        id: event.target.id
       }),
     }).then(() => {
       location.reload();
