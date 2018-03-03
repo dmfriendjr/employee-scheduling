@@ -112,6 +112,26 @@ button:hover {
   margin-top: 30px;
 }
 
+.wrap-signup {
+  background: rgba(255, 255, 255, 0.80);
+  border-radius: 10px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+  z-index: 1;
+  overflow: hidden;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  padding: 70px 10px 40px 10px;
+  width: 30%;
+  margin-top: 30px;
+  margin-bottom: 150px;
+}
+
 .login-form-title {
   font-family: "Poppins";
   font-weight: 700;
@@ -254,9 +274,6 @@ button:hover {
   z-index: 5;
 }
 
-html, body {
-  margin-bottom: 118px;
-}
 .footer-link {
   color: white;
 }
@@ -287,10 +304,6 @@ html, body {
   color: #57b846;
   margin-bottom:10px;
 }
-
-/* nav li {
-  list-style: none;
-} */
 
 .nav-name-dropdown {
   text-decoration: underline;
@@ -350,14 +363,14 @@ html, body {
   margin-left: 10px;
 }
 
-#account-background {
+/* #account-background {
   background-color: #FFFFFF;
   height: 100%;
   left: 0;
   position: fixed;
   right: 0;
   z-index: -1;
-}
+} */
 
 .account-page-font {
   color: #FFFFFF
@@ -423,4 +436,12 @@ html, body {
 
 #employeeFormPosition:focus ~ #positionHelp {
   display:block;
+}
+
+#email-message {
+  display: none;
+}
+
+#emailSchedule:hover ~ #email-message {
+  display: block;
 }
