@@ -6,11 +6,44 @@
 
 <div id="account-background"></div>
 
+{{!-- <nav id="navigation" class="navbar navbar-toggleable-md navbar-light">
+
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon">&nbsp;</span>
+  </button>
+
+  <h3 class="navbar-header mr-auto account-page-font">EmployEase</h3>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav d-flex justify-content-end">
+
+      <li class="nav-item">
+        <a class="nav-link" href="/manageemployees">
+          <i class="fas fa-users"></i> Company Overview
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/scheduling">
+          <i class="fas fa-users"></i> Scheduling
+        </a>
+      </li>
+
+    </ul>
+
+    <div class="navbar-right disabled">
+      Signed in as {{user.username}}
+    </div>
+
+  </div>
+</nav> --}}
+
 <nav id="navigation" class="navbar navbar-default">
   <div class="container">
     <h3 class="navbar-header account-page-font">EmployEase</h3>
     <div class="navbar-right dropdown account-page-font">
-      Signed in as <span class="dropdown-toggle nav-name-dropdown" data-toggle="dropdown">{{user.username}}</span>
+      Signed in as
+      <span class="dropdown-toggle nav-name-dropdown" data-toggle="dropdown">{{user.username}}</span>
       <span class="caret"></span>
       </a>
       <ul class="dropdown-menu">
@@ -33,7 +66,7 @@
           </a>
         </li>
       </ul>
-  </div>
+    </div>
   </div>
 </nav>
 
