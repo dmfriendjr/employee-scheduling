@@ -55,7 +55,6 @@
 
     <div id = "new-shift" class="col-md-3 pt-2 order-md-first order-sm-12">
       <h4 class="text-right">New Shift</h4>
-      <p class = "text-center bg-warning rounded">{{message}}</p>
         
       <form id="new-shift-form" action="/shifts" class="form-group" method="post">
 
@@ -74,11 +73,11 @@
         </div>
 
         <div class="form-group text-right">
-          <input type="datetime-local" id="shiftStarts" placeholder="Shift Starts" name="start_date" class="form-control employee-form-control text-right border-bottom col-10 offset-2">
+          <input type="text" id="shiftStarts" placeholder="Shift Starts" name="start_date" class="form-control employee-form-control text-right border-bottom col-10 offset-2">
         </div>
 
         <div class="form-group text-right">
-          <input type="datetime-local" id="shiftEnds" placeholder="Shift Ends" name="end_date" class="form-control employee-form-control text-right border-bottom col-10 offset-2">
+          <input type="text" id="shiftEnds" placeholder="Shift Ends" name="end_date" class="form-control employee-form-control text-right border-bottom col-10 offset-2">
         </div>
 
         <button class="invisible-button float-right" type="submit">
@@ -87,18 +86,28 @@
           
       </form>
 
-  <button class="btn btn-success" onclick="sentScheduleAlert()" id="emailSchedule">Email Schedule</button>
     </div>
 
     <div class="col-md-7 offset-md-1 col-s-12 order-sm-1">
       <form class="main-date-form" action="/shifts" method="get">
-        <h1 class="text-center pt-2">Schedule <button class="invisible-button" onclick="sentScheduleAlert()" id="emailSchedule"><i class="far fa-envelope"></i></button></h1>
+        <h1 class="text-center pt-2">Schedule</h1>
 
-        <div class="d-flex justify-content-center">
+        <p class="text-center bg-warning rounded">{{message}}</p>
+
+        <div class="d-flex justify-content-center pb-1">
           <input class="schedule-input" type="date" id="datepicker">
         </div>
       </form>
+
       <div class="timetable"></div>
+
+            <form action="/scheduling" method="get">
+              <div class="d-flex justify-content-center pt-4">
+                <button class="invisible-button" id="emailSchedule">
+                  <h6>Email Schedule</h6>
+                </button>
+              </div>
+            </form>
     </div>
 
 
@@ -122,7 +131,7 @@
               </div>
 
               <div class="form-group">
-                <input type="datetime-local" name="start_date" class="form-control" value={{shiftStart}} />
+                <input type="text" id="shiftStarts" name="start_date" class="form-control" value={{shiftStart}} />
               </div>
 
               <div class="form-group">

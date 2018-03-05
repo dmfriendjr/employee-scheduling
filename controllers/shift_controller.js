@@ -97,7 +97,7 @@ router.post('/emailSchedule', isLoggedIn, (req, res) => {
       mailer.sendScheduleEmails(req.body[key].email, req.body[key].shifts);
     }
   }
-
+  req.flash('shiftMessage', 'Schedules emailed to employees.');
   res.redirect('/scheduling');
 });
 
